@@ -521,32 +521,6 @@ h6 {
   background: #05739b;
 }
 
-#hero .btn-watch-video {
-  font-size: 16px;
-  transition: 0.5s;
-  margin-left: 25px;
-  color: #222222;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-}
-
-#hero .btn-watch-video i {
-  color: #106eea;
-  font-size: 32px;
-  transition: 0.3s;
-  line-height: 0;
-  margin-right: 8px;
-}
-
-#hero .btn-watch-video:hover {
-  color: #106eea;
-}
-
-#hero .btn-watch-video:hover i {
-  color: #3b8af2;
-}
-
 @media (min-width: 1024px) {
   #hero {
     background-attachment: fixed;
@@ -569,8 +543,7 @@ h6 {
     margin-bottom: 30px;
   }
 
-  #hero .btn-get-started,
-  #hero .btn-watch-video {
+  #hero .btn-get-started{
     font-size: 13px;
   }
 }
@@ -582,52 +555,34 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Sections General
+# Login Page
 --------------------------------------------------------------*/
-section {
-  padding: 60px 0;
-  overflow: hidden;
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
 }
 
-.section-bg {
-  background-color: #f6f9fe;
+#login h1 {
+  color: #065671
 }
 
-.section-title {
-  text-align: center;
-  padding-bottom: 30px;
+#login .signin-btn:hover {
+  background-color: #05739b;
 }
 
-.section-title h2 {
-  font-size: 13px;
-  letter-spacing: 1px;
-  font-weight: 700;
-  padding: 8px 20px;
-  margin: 0;
-  background: #e7f1fd;
-  color: #106eea;
-  display: inline-block;
+#login .signin-btn {
   text-transform: uppercase;
-  border-radius: 50px;
-}
-
-.section-title h3 {
-  margin: 15px 0 0 0;
-  font-size: 32px;
-  font-weight: 700;
-}
-
-.section-title h3 span {
-  color: #106eea;
-}
-
-.section-title p {
-  margin: 15px auto 0 auto;
-  font-weight: 600;
-}
-
-@media (min-width: 1024px) {
-  .section-title p {
-    width: 50%;
-  }
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: #fff;
+  background: #065671;
 }
