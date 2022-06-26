@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 //Import Libraries
 const { urlencoded } = require("express");
 const express = require("express");
@@ -9,7 +11,11 @@ const path = require("path");
 
 //In-built modules (filesystem and path)
 const app = express();
-//require("dotenv").config();
+const config = require("./config.json").development;
+
+// Set up pg connection with knex
+//const knexConfig = require("./db/knexfile").development;
+// const knex = require("knex")(knexConfig)
 
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
@@ -70,6 +76,6 @@ app.get("/employer/:employerName", (req,res) => {
 //app.use("/", new AppRouter(JobService, express).router());
 
 //setup port
-app.listen(3000, () => {
-    console.log('Listening to 3000');
+app.listen(config, () => {
+    console.log(`Listening to ${config.port}`);
 })
