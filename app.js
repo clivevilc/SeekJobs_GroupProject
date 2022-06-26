@@ -1,7 +1,7 @@
 //Import Libraries
 const { urlencoded } = require("express");
 const express = require("express");
-const {create} = require("express-handlebars");
+const {engine} = require("express-handlebars");
 
 //Import required modules
 const fs = require("fs");
@@ -18,8 +18,8 @@ const JobService = require("./Services/JobServices");
 /** **************** Configure Express *********************** */
 
 //Setup Handlebars
-// app.engine('handlebars', hbs.engine);
-// app.set("view engine", "handlebars");
+app.engine('handlebars', engine({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
 
 //Setup Express middlewares
 app.use(express.static("public"));
@@ -29,9 +29,34 @@ app.use(express.json());
 
 /** **************** Configure Job Services *********************** */
 
+//Render user homepage
 app.get("/", (req,res) => {
-    res.sendFile("index.html");
+    res.render("home");
 })
+
+//Render user login page
+app.get("/login", (req, res) =>{
+    res.render("login");
+})
+
+//Render user profile page 
+app.get("user/:userName", (req, res) =>{
+    res.render("user")
+})
+
+//Render user application status page
+
+
+//Render biz login ?? Does it need to be separated with the user login?
+app.get("/employerlogin", (req, res) =>{
+    res.render("employerLogin")
+})
+
+//Render biz add job page
+
+//Render biz profile
+
+
 
 
 /** **************** Configure Router *********************** */
