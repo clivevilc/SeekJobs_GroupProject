@@ -53,8 +53,14 @@ app.get("/employerlogin", (req, res) =>{
 })
 
 //Render biz add job page
+app.get("/addjob", (req, res) => {
+    res.render("addJob");
+})
 
 //Render biz profile
+app.get("/employer/:employerName", (req,res) => {
+    res.render("employerProfile")
+})
 
 
 
