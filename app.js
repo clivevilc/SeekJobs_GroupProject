@@ -48,6 +48,9 @@ app.get("user/:userName", (req, res) =>{
 
 
 //Render biz login ?? Does it need to be separated with the user login?
+app.get("/employerlogin", (req, res) =>{
+    res.render("employerLogin")
+})
 
 //Render biz add job page
 
