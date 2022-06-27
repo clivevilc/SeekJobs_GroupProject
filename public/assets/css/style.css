@@ -543,7 +543,7 @@ h6 {
     margin-bottom: 30px;
   }
 
-  #hero .btn-get-started{
+  #hero .btn-get-started {
     font-size: 13px;
   }
 }
@@ -560,14 +560,14 @@ h6 {
 
 .divider:after,
 .divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
 }
 
 #login h1 {
-  color: #065671
+  color: #065671;
 }
 
 #login .signin-btn:hover {
