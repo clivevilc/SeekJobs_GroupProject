@@ -1,6 +1,10 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -16,17 +20,8 @@ a:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 /*--------------------------------------------------------------
@@ -561,7 +556,6 @@ h6 {
 /*--------------------------------------------------------------
 # Login Page
 --------------------------------------------------------------*/
-
 .divider:after,
 .divider:before {
 content: "";
@@ -594,14 +588,6 @@ background: #eee;
 /*--------------------------------------------------------------
 # Seek Jobs - 3 search bars + search btn
 --------------------------------------------------------------*/
-.dropbtn {
-  /* color: white; */
-  /* padding: 1vh; */
-  /* font-size: 100vw; */
-  /* border: none; */
-  cursor: pointer;
-}
-
 .search-bar {
   font-size: 1.3vw;
   padding: 1vh 9vw 1vh 1vw;
@@ -612,7 +598,11 @@ background: #eee;
   background-color: #F8F8F8;
 }
 
-#myInput {
+/* input[type=text] {
+  background-color: #f1f1f1;
+} */
+
+#input-job-company, #input-location {
   font-size: 1.3vw;
   border: none;
 }
@@ -642,12 +632,17 @@ background: #eee;
   background-color: #E8E8E8;
 }
 
+.dropbtn {
+  cursor: pointer;
+}
+
 .show {
   display: block;
 }
 
 .search-btn {
-  background: #2196F3;
+  color: white;
+  background: #065671;
   cursor: pointer;
   font-size: 1.8vw;
   padding: 1.1vh 0.7vw;
@@ -665,4 +660,41 @@ background: #eee;
   content: "";
   clear: both;
   display: table;
+}
+
+::placeholder, select {
+  color: black;
+}
+
+/* Autocomplete */
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+/* delete: no effect ? */
+.autocomplete-items {
+  position: absolute;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 0.8vh 1vw;
+  cursor: pointer;
+  background-color: #fff; 
+}
+
+.autocomplete-items div:hover {
+  background-color: #F0F0F0; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+/* delete: no effect ? */
+.autocomplete-active {
+  background-color: #0b7dda !important; 
+  color: seashell; 
 }

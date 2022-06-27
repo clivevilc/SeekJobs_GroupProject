@@ -44,16 +44,18 @@
           <a href="#searchjobs" class="btn-get-started scrollto">Search Jobs</a>
         </div><br>
         <!-- Search bars -->
-        <input type="text" placeholder="Job title or company" class="search-bar">
-        <input type="text" placeholder="All locations" class="search-bar">
         <div class="dropdown">
-          <input type="text" placeholder="Employment types" id="myInput" class="search-bar dropbtn dropdown" onkeyup="filterFunction()">
-          <div id="search-bar-dropdown" class="dropdown-content dropbtn">
-            <a href="#Full-time">Full-time</a>
-            <a href="#Part-time">Part-time</a>
-            <a href="#Internship">Internship</a>
-          </div>
+          <input type="text" placeholder="Job title or company" id="input-job-company" class="search-bar dropbtn" onkeyup="filterFunction()">
         </div>
+        <div class="dropdown">
+          <input type="text" placeholder="All locations" id="input-location" class="search-bar dropbtn" onkeyup="filterFunction()">
+        </div>
+        <select class="search-bar dropbtn">
+          <option value="Employment Types">Employment Types</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+          <option value="Internship">Internship</option>
+        </select>
         <i class="fa-solid fa-magnifying-glass search-btn"></i>
       </div>
     </section>
