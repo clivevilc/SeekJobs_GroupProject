@@ -25,6 +25,10 @@ h6 {
   font-family: "Roboto", sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -588,7 +592,7 @@ background: #eee;
 }
 
 /*--------------------------------------------------------------
-# Seek Jobs - 3 Search Bars
+# Seek Jobs - 3 search bars + search btn
 --------------------------------------------------------------*/
 .dropbtn {
   /* color: white; */
@@ -598,24 +602,22 @@ background: #eee;
   cursor: pointer;
 }
 
+.search-bar {
+  font-size: 1.3vw;
+  padding: 1vh 9vw 1vh 1vw;
+  border: none;
+}
+
 .search-bar:hover, .search-bar:focus {
   background-color: #F8F8F8;
 }
 
 #myInput {
-  box-sizing: border-box;
-  /* background-position: 5px 12px; */
-  /* background-repeat: no-repeat; */
   font-size: 1.3vw;
-  padding: 1vh 5vw 1vh 1vh;
   border: none;
-  /* border-bottom: 1px solid #ddd; */
 }
 
-#myInput:focus {outline: 3px solid #ddd;}
-
 .dropdown {
-  position: relative;
   display: inline-block;
 }
 
@@ -623,7 +625,7 @@ background: #eee;
   display: none;
   position: absolute;
   background-color: #f6f6f6;
-  min-width: 230px;
+  min-width: 25.4vw;
   overflow: auto;
   border: 1px solid #ddd;
   z-index: 1;
@@ -631,11 +633,36 @@ background: #eee;
 
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 1vh 1vw;
   text-decoration: none;
   display: block;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown a:hover {
+  background-color: #E8E8E8;
+}
 
-.show {display: block;}
+.show {
+  display: block;
+}
+
+.search-btn {
+  background: #2196F3;
+  cursor: pointer;
+  font-size: 1.8vw;
+  padding: 1.1vh 0.7vw;
+  border-radius: 4px;
+  margin-left: 0.5vw;
+  position: absolute;
+}
+
+.search-btn:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+.search-btn::after {
+  content: "";
+  clear: both;
+  display: table;
+}
