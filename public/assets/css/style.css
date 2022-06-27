@@ -24,10 +24,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
 }
 
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
-#preloader {
+/* #preloader {
   position: fixed;
   top: 0;
   left: 0;
@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   100% {
     transform: rotate(360deg);
   }
-}
+} */
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -470,7 +470,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #hero:before {
   content: "";
-  background: rgba(255, 255, 255, 0.808);
+  background: rgba(221, 221, 221, 0.824);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -542,7 +542,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 30px;
   }
 
-  #hero .btn-get-started{
+  #hero .btn-get-started {
     font-size: 13px;
   }
 }
@@ -558,14 +558,14 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 .divider:after,
 .divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
 }
 
 #login h1 {
-  color: #065671
+  color: #065671;
 }
 
 #login .signin-btn:hover {
