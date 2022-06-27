@@ -30,9 +30,9 @@ app.use(express.json());
 /** **************** Configure Job Services *********************** */
 
 //Render user homepage
-app.get("/", (req, res) => {
-  res.render("index");
-});
+app.get("/", (req,res) => {
+    res.render("index");
+})
 
 //Render user login page
 app.get("/login", (req, res) => {
