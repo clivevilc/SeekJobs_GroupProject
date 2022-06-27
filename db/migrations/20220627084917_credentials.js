@@ -3,10 +3,11 @@
  * @returns { Promise<void> }
  */
  exports.up = function(knex) {
-    return knex.schema.createTable("users", (table) =>{
+    return knex.schema.createTable("credentials", (table) =>{
         table.increments();
         table.string("username").unique().notNullable();
         table.string("password").notNullable();
+        table.string("user_type").notNullable();
         table.timestamps(false, true);
         })
   
@@ -17,6 +18,6 @@
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.dropTable("users");
+    return knex.schema.dropTable("credentials");
   
 };
