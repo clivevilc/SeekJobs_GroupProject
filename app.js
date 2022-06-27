@@ -31,7 +31,7 @@ app.use(express.json());
 
 //Render user homepage
 app.get("/", (req,res) => {
-    res.render("home");
+    res.render("index");
 })
 
 //Render user login page
