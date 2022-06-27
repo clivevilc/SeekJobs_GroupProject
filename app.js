@@ -20,7 +20,7 @@ const config = require("./config.json").development;
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
-
+const port = 3000;
 /** **************** Configure Express *********************** */
 
 //Setup Handlebars
@@ -68,6 +68,12 @@ app.get("/employer/:employerName", (req,res) => {
     res.render("employerProfile")
 })
 
+//Render Error Page
+app.get("*", (req, res) => {
+  res.status(404);
+  console.log(`Error 404`);
+  res.render("error");
+});
 
 
 
@@ -76,6 +82,8 @@ app.get("/employer/:employerName", (req,res) => {
 //app.use("/", new AppRouter(JobService, express).router());
 
 //setup port
+
 app.listen(config, () => {
     console.log(`Listening to ${config.port}`);
 })
+
