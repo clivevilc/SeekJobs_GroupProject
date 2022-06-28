@@ -574,7 +574,7 @@ h1, h2, h3, h4, h5, h6 {
 .autocomplete-items {
   position: absolute;
   z-index: 99;
-  /* pautocomplete items have the same width as the container */
+  /* autocomplete items have the same width as the container */
   top: 100%;
   left: 0;
   right: 0;
