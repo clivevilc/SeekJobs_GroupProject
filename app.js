@@ -21,11 +21,9 @@ const config = require("./config.json").development;
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
-/** **************** Configure Express *********************** */
 
+/** **************** Configure Express *********************** */
 //Setup Handlebars
-// app.engine('handlebars', engine({defaultLayout: "main"}));
-// app.set("view engine", "handlebars");
 app.set("view engine", "hbs");
 app.engine("hbs", engine ({
     layoutsDir: `${__dirname}/views/layouts`,
@@ -39,9 +37,7 @@ app.use(express.static("public"));
 app.use(urlencoded({extended:false}));
 app.use(express.json());
 
-
 /** **************** Configure Job Services *********************** */
-
 //Render user homepage
 app.get("/", (req,res) => {
     res.render("index", { layout: 'main' });
@@ -81,11 +77,7 @@ app.get("*", (req, res) => {
   console.log(`Error 404`);
   res.render("error");
 });
-
-
-
 /** **************** Configure Router *********************** */
-
 //app.use("/", new AppRouter(JobService, express).router());
 
 //setup port
