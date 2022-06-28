@@ -4,6 +4,7 @@ require("dotenv").config();
 const { urlencoded } = require("express");
 const express = require("express");
 const {engine} = require("express-handlebars");
+const port = 3000;
 
 //Import required modules
 const fs = require("fs");
@@ -20,12 +21,18 @@ const config = require("./config.json").development;
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
-const port = 3000;
 /** **************** Configure Express *********************** */
 
 //Setup Handlebars
-app.engine('handlebars', engine({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+// app.engine('handlebars', engine({defaultLayout: "main"}));
+// app.set("view engine", "handlebars");
+app.engine('hbs', engine ({
+    layoutsDir: `${__dirname}/views/layouts`,
+    partialsDir: `${__dirname}/views/partials`,
+    extname: 'hbs',
+    defaultLayout: 'main'
+}));
+app.set("view engine", "hbs");
 
 //Setup Express middlewares
 app.use(express.static("public"));
