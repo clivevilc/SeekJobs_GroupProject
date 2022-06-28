@@ -10,10 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "i": "^0.3.7",
     "knex": "^2.1.0",
+    "npm": "^8.13.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "pg": "^8.7.3"
   }
 }
