@@ -4,7 +4,7 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable("user_applicant", (table) =>{
-    table.increments();
+    table.increments().primary();
     table.string("first_name").notNullable();
     table.string("last_name").notNullable();
     table.boolean("upload_cv");

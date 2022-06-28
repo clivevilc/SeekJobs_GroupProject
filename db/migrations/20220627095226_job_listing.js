@@ -4,7 +4,7 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable("job_listing", (table) =>{
-    table.increments();
+    table.increments().primary();
     table.string("title").notNullable();
     table.integer("salary");
     table.string("job_type");

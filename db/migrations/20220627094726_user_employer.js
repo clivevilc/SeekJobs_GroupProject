@@ -4,7 +4,7 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable("user_employer", (table) => {
-    table.increments();
+    table.increments().primary();
     table.string("company_name").notNullable();
     table.string("location").notNullable();
     table.string("industry");
