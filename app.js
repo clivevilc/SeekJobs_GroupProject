@@ -26,13 +26,13 @@ const JobService = require("./Services/JobServices");
 //Setup Handlebars
 // app.engine('handlebars', engine({defaultLayout: "main"}));
 // app.set("view engine", "handlebars");
-app.engine('hbs', engine ({
+app.set("view engine", "hbs");
+app.engine("hbs", engine ({
     layoutsDir: `${__dirname}/views/layouts`,
     partialsDir: `${__dirname}/views/partials`,
-    extname: 'hbs',
-    defaultLayout: 'main'
+    extname: "hbs",
+    defaultLayout: "index"
 }));
-app.set("view engine", "hbs");
 
 //Setup Express middlewares
 app.use(express.static("public"));
@@ -44,7 +44,7 @@ app.use(express.json());
 
 //Render user homepage
 app.get("/", (req,res) => {
-    res.render("index");
+    res.render("index", { layout: 'main' });
 })
 
 //Render user login page
