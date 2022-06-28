@@ -15,8 +15,8 @@ const app = express();
 const config = require("./config.json").development;
 
 // Set up pg connection with knex
-//const knexConfig = require("./db/knexfile").development;
-// const knex = require("knex")(knexConfig)
+const knexConfig = require("./db/knexfile").development;
+const knex = require("knex")(knexConfig)
 
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
@@ -39,9 +39,11 @@ app.use(express.json());
 
 /** **************** Configure Job Services *********************** */
 //Render user homepage
+
 app.get("/", (req,res) => {
     res.render("index");
 })
+
 
 //Render user login page
 app.get("/login", (req, res) =>{
@@ -72,13 +74,18 @@ app.get("/employer/:employerName", (req,res) => {
 })
 
 //Render Error Page
-app.get("*", (req, res) => {
-  res.status(404);
-  console.log(`Error 404`);
-  res.render("error");
-});
+
+// app.get("*", (req, res) => {
+//   res.status(404);
+//   console.log(`Error 404`);
+//   res.render("error");
+// });
+
+
 /** **************** Configure Router *********************** */
-//app.use("/", new AppRouter(JobService, express).router());
+
+app.use("/api", new AppRouter(JobService, express, knex).router());
+
 
 //setup port
 app.listen(config, () => {
