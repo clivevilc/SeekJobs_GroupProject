@@ -76,6 +76,3 @@ app.get("/employerlogin", (req, res) =>{
 app.listen(port, () => {
     console.log(`Listening to ${port}`);
 })
-
-
-/Users/jasminezeng/Documents/Coding/Bootcamp/Bootcamp_Projects
