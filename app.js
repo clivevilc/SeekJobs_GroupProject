@@ -89,8 +89,6 @@ app.get("*", (req, res) => {
 //app.use("/", new AppRouter(JobService, express).router());
 
 //setup port
-
 app.listen(config, () => {
     console.log(`Listening to ${config.port}`);
 })
-
