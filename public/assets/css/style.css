@@ -23,7 +23,6 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
 }
-
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -71,7 +70,6 @@ h1, h2, h3, h4, h5, h6 {
     transform: rotate(360deg);
   }
 }
-
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -104,7 +102,6 @@ h1, h2, h3, h4, h5, h6 {
   visibility: visible;
   opacity: 1;
 }
-
 /*--------------------------------------------------------------
 # Disable aos animation delay on mobile devices
 --------------------------------------------------------------*/
@@ -113,7 +110,6 @@ h1, h2, h3, h4, h5, h6 {
     transition-delay: 0 !important;
   }
 }
-
 /*--------------------------------------------------------------
 # Top Bar
 --------------------------------------------------------------*/
@@ -158,7 +154,6 @@ h1, h2, h3, h4, h5, h6 {
 #topbar .social-links a:hover {
   color: white;
 }
-
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -199,7 +194,6 @@ h1, h2, h3, h4, h5, h6 {
 .scrolled-offset {
   margin-top: 70px;
 }
-
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -456,7 +450,6 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile .dropdown>.dropdown-active {
   display: block;
 }
-
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -552,39 +545,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 120vh;
   }
 }
-
-/*--------------------------------------------------------------
-# Login Page
---------------------------------------------------------------*/
-.divider:after,
-.divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
-}
-
-#login h1 {
-  color: #065671
-}
-
-#login .signin-btn:hover {
-  background-color: #05739b;
-}
-
-#login .signin-btn {
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 10px 28px;
-  border-radius: 4px;
-  transition: 0.5s;
-  color: #fff;
-  background: #065671;
-}
-
 /*--------------------------------------------------------------
 # Seek Jobs - 3 search bars + search btn
 --------------------------------------------------------------*/
@@ -647,7 +607,7 @@ background: #eee;
   font-size: 1.8vw;
   padding: 1.1vh 0.7vw;
   border-radius: 4px;
-  margin-left: 0.5vw;
+  margin-left: 0.8vw;
   position: absolute;
 }
 
@@ -655,8 +615,7 @@ background: #eee;
   background: #0b7dda;
 }
 
-/* Clear floats */
-.search-btn::after {
+.search-btn::after { /* Clear floats */
   content: "";
   clear: both;
   display: table;
@@ -672,11 +631,10 @@ background: #eee;
   display: inline-block;
 }
 
-/* delete: no effect ? */
 .autocomplete-items {
   position: absolute;
   z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
+  /* pautocomplete items have the same width as the container */
   top: 100%;
   left: 0;
   right: 0;
@@ -692,9 +650,93 @@ background: #eee;
   background-color: #F0F0F0; 
 }
 
-/*when navigating through the items using the arrow keys:*/
-/* delete: no effect ? */
 .autocomplete-active {
   background-color: #0b7dda !important; 
   color: seashell; 
+}
+
+/* Employment Types */
+.custom-select {
+  position: relative;
+  display: inline-block;
+  font-family: Arial;
+  width: 24.4vw;
+}
+
+.custom-select select {
+  display: none;
+}
+
+.select-selected {
+  background-color: white;
+}
+
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+.select-items div, .select-selected {
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.3vw;
+  padding: 1vh 9vw 1vh 1vw;
+  border: none;
+}
+
+.select-items {
+  position: absolute;
+  background-color: white;
+  z-index: 99;
+  width: 24.4vw;
+}
+
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/*--------------------------------------------------------------
+# Login Page
+--------------------------------------------------------------*/
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+#login h1 {
+  color: #065671
+}
+
+#login .signin-btn:hover {
+  background-color: #05739b;
+}
+
+#login .signin-btn {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: #fff;
+  background: #065671;
 }
