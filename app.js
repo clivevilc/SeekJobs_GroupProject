@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 //Import Libraries
 const { urlencoded } = require("express");
 const express = require("express");
@@ -10,12 +12,15 @@ const path = require("path");
 
 //In-built modules (filesystem and path)
 const app = express();
-//require("dotenv").config();
+const config = require("./config.json").development;
+
+// Set up pg connection with knex
+//const knexConfig = require("./db/knexfile").development;
+// const knex = require("knex")(knexConfig)
 
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
-
 /** **************** Configure Express *********************** */
 
 //Setup Handlebars
@@ -39,8 +44,7 @@ app.use(express.json());
 
 //Render user homepage
 app.get("/", (req,res) => {
-    // res.render("home");
-    res.render("home");
+    res.render("index");
 })
 
 //Render user login page
@@ -62,9 +66,21 @@ app.get("/employerlogin", (req, res) =>{
 })
 
 //Render biz add job page
+app.get("/addjob", (req, res) => {
+    res.render("addJob");
+})
 
 //Render biz profile
+app.get("/employer/:employerName", (req,res) => {
+    res.render("employerProfile")
+})
 
+//Render Error Page
+app.get("*", (req, res) => {
+  res.status(404);
+  console.log(`Error 404`);
+  res.render("error");
+});
 
 
 
@@ -73,6 +89,6 @@ app.get("/employerlogin", (req, res) =>{
 //app.use("/", new AppRouter(JobService, express).router());
 
 //setup port
-app.listen(port, () => {
-    console.log(`Listening to ${port}`);
+app.listen(config, () => {
+    console.log(`Listening to ${config.port}`);
 })

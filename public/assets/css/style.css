@@ -23,10 +23,11 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
 }
-/*--------------------------------------------------------------
+
+/* --------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
-#preloader {
+/* #preloader {
   position: fixed;
   top: 0;
   left: 0;
@@ -69,7 +70,8 @@ h1, h2, h3, h4, h5, h6 {
   100% {
     transform: rotate(360deg);
   }
-}
+} */
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -269,68 +271,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #0c8188;
 }
 
-.navbar .dropdown ul {
-  display: block;
-  position: absolute;
-  left: 28px;
-  top: calc(100% + 30px);
-  margin: 0;
-  padding: 10px 0;
-  z-index: 99;
-  opacity: 0;
-  visibility: hidden;
-  background: #fff;
-  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-  transition: 0.3s;
-}
-
-.navbar .dropdown ul li {
-  min-width: 200px;
-}
-
-.navbar .dropdown ul a {
-  padding: 10px 20px;
-  font-weight: 400;
-}
-
-.navbar .dropdown ul a i {
-  font-size: 12px;
-}
-
-.navbar .dropdown ul a:hover,
-.navbar .dropdown ul .active:hover,
-.navbar .dropdown ul li:hover>a {
-  color: #065671;
-}
-
-.navbar .dropdown:hover>ul {
-  opacity: 1;
-  top: 100%;
-  visibility: visible;
-}
-
-.navbar .dropdown .dropdown ul {
-  top: 0;
-  left: calc(100% - 30px);
-  visibility: hidden;
-}
-
-.navbar .dropdown .dropdown:hover>ul {
-  opacity: 1;
-  top: 0;
-  left: 100%;
-  visibility: visible;
-}
-
-@media (max-width: 1366px) {
-  .navbar .dropdown .dropdown ul {
-    left: -90%;
-  }
-
-  .navbar .dropdown .dropdown:hover>ul {
-    left: -100%;
-  }
-}
 
 /**
 * Mobile Navigation 
@@ -417,53 +357,20 @@ h1, h2, h3, h4, h5, h6 {
   margin: 15px;
 }
 
-.navbar-mobile .dropdown ul {
-  position: static;
-  display: none;
-  margin: 10px 20px;
-  padding: 10px 0;
-  z-index: 99;
-  opacity: 1;
-  visibility: visible;
-  background: #fff;
-  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-}
-
-.navbar-mobile .dropdown ul li {
-  min-width: 200px;
-}
-
-.navbar-mobile .dropdown ul a {
-  padding: 10px 20px;
-}
-
-.navbar-mobile .dropdown ul a i {
-  font-size: 12px;
-}
-
-.navbar-mobile .dropdown ul a:hover,
-.navbar-mobile .dropdown ul .active:hover,
-.navbar-mobile .dropdown ul li:hover>a {
-  color: #065671;
-}
-
-.navbar-mobile .dropdown>.dropdown-active {
-  display: block;
-}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
   height: 75vh;
-  background: url("/public/assets/img/web1.jpg") top left;
+  background: url("/assets/img/web1.jpg") top left;
   background-size: cover;
   position: relative;
 }
 
 #hero:before {
   content: "";
-  background: rgba(255, 255, 255, 0.808);
+  background: rgba(221, 221, 221, 0.824);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -535,7 +442,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 30px;
   }
 
-  #hero .btn-get-started{
+  #hero .btn-get-started {
     font-size: 13px;
   }
 }
@@ -545,6 +452,39 @@ h1, h2, h3, h4, h5, h6 {
     height: 120vh;
   }
 }
+
+/*--------------------------------------------------------------
+# Login Page
+--------------------------------------------------------------*/
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+#login h1 {
+  color: #065671;
+}
+
+#login .signin-btn:hover {
+  background-color: #05739b;
+}
+
+#login .signin-btn {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: #fff;
+  background: #065671;
+}
+
 /*--------------------------------------------------------------
 # Seek Jobs - 3 search bars + search btn
 --------------------------------------------------------------*/
