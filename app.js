@@ -4,6 +4,7 @@ require("dotenv").config();
 const { urlencoded } = require("express");
 const express = require("express");
 const {engine} = require("express-handlebars");
+const port = 3000;
 
 //Import required modules
 const fs = require("fs");
@@ -20,25 +21,29 @@ const knex = require("knex")(knexConfig)
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
-const port = 3000;
-/** **************** Configure Express *********************** */
 
+/** **************** Configure Express *********************** */
 //Setup Handlebars
-app.engine('handlebars', engine({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+app.set("view engine", "hbs");
+app.engine("hbs", engine ({
+    extname: "hbs",
+    defaultLayout: "main",
+    layoutsDir: `${__dirname}/views/layouts`,
+    partialsDir: `${__dirname}/views/partials`
+}));
 
 //Setup Express middlewares
 app.use(express.static("public"));
 app.use(urlencoded({extended:false}));
 app.use(express.json());
 
-
 /** **************** Configure Job Services *********************** */
-
 //Render user homepage
- app.get("/", (req,res) => {
-     res.render("home");
- })
+
+app.get("/", (req,res) => {
+    res.render("index");
+})
+
 
 //Render user login page
 app.get("/login", (req, res) =>{
@@ -69,6 +74,7 @@ app.get("/employer/:employerName", (req,res) => {
 })
 
 //Render Error Page
+
 // app.get("*", (req, res) => {
 //   res.status(404);
 //   console.log(`Error 404`);
@@ -76,14 +82,12 @@ app.get("/employer/:employerName", (req,res) => {
 // });
 
 
-
 /** **************** Configure Router *********************** */
 
 app.use("/api", new AppRouter(JobService, express, knex).router());
 
-//setup port
 
+//setup port
 app.listen(config, () => {
     console.log(`Listening to ${config.port}`);
 })
-
