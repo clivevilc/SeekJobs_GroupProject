@@ -2,6 +2,7 @@
 const { urlencoded } = require("express");
 const express = require("express");
 const {engine} = require("express-handlebars");
+const port = 3000;
 
 //Import required modules
 const fs = require("fs");
@@ -18,8 +19,15 @@ const JobService = require("./Services/JobServices");
 /** **************** Configure Express *********************** */
 
 //Setup Handlebars
-app.engine('handlebars', engine({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+// app.engine('handlebars', engine({defaultLayout: "main"}));
+// app.set("view engine", "handlebars");
+app.engine('hbs', engine ({
+    layoutsDir: `${__dirname}/views/layouts`,
+    partialsDir: `${__dirname}/views/partials`,
+    extname: 'hbs',
+    defaultLayout: 'main'
+}));
+app.set("view engine", "hbs");
 
 //Setup Express middlewares
 app.use(express.static("public"));
@@ -31,6 +39,7 @@ app.use(express.json());
 
 //Render user homepage
 app.get("/", (req,res) => {
+    // res.render("home");
     res.render("home");
 })
 
@@ -64,6 +73,9 @@ app.get("/employerlogin", (req, res) =>{
 //app.use("/", new AppRouter(JobService, express).router());
 
 //setup port
-app.listen(3000, () => {
-    console.log('Listening to 3000');
+app.listen(port, () => {
+    console.log(`Listening to ${port}`);
 })
+
+
+/Users/jasminezeng/Documents/Coding/Bootcamp/Bootcamp_Projects
