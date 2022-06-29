@@ -41,8 +41,7 @@ app.use(urlencoded({ extended: false }));
 app.use(express.json());
 
 //Setup Auth (***** To Be Done *******)
-const hashFunctions = require("./bcrypt"); // watch Bibek video
-const LocalStrategy = require("passport-local").Strategy; // Get strategy parse out of passport
+const passportFunctions = require("./passport")
 const expressSession = require("express-session");
 
 app.use(
@@ -58,33 +57,8 @@ app.use(
   );
 
 // Setup Local Login (***** To Be Done *******)
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(
-    "local-login",
-    new LocalStrategy(async (email, password, done) => {
-      try {
-        let users = await knex("users").where({ email: email });
-        if (users.length === 0) {
-          return done(null, false, { message: `incorrect user` });
-        }
-        let user = users[0];
-        let result = await hashFunctions.checkPassword(password, user.password);
-        if (result) {
-          console.log(`Login Succesfully`);
-          return done(null, user);
-        } else {
-          console.log(`Incorrect PW/User name`);
-          return done(null, false, { message: `incorrect username / password` });
-        }
-      } catch (err) {
-        if (err) {
-          done(err);
-        }
-      }
-    })
-  );
+app.use(passportFunctions.initialize());
+app.use(passportFunctions.session());
 
 
 /** **************** Configure Job Services *********************** */
@@ -101,9 +75,9 @@ app.get("/login", (req, res) => {
 
 //Render user profile page (***** To Be Done *******)
 
-// app.get("user/:userName", (req, res) => {
-//   res.render("user");
-// });
+app.get("user/:userName", (req, res) => {
+  res.render("user");
+});
 
 app.get("/user", (req, res) => {
     res.render("user");
@@ -128,11 +102,11 @@ app.get("/employer/:employerName", (req, res) => {
 
 //Render Error Page
 
-// app.get("*", (req, res) => {
-//   res.status(404);
-//   console.log(`Error 404`);
-//   res.render("error");
-// });
+app.get("*", (req, res) => {
+  res.status(404);
+  console.log(`Error 404`);
+  res.render("error");
+});
 
 
 /** **************** Configure Router *********************** */
