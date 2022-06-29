@@ -21,6 +21,7 @@ const knex = require("knex")(knexConfig)
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
+const credService = require("./Services/CredService");
 
 /** **************** Configure Express *********************** */
 //Setup Handlebars
