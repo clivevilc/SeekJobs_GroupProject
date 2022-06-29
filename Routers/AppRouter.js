@@ -20,6 +20,7 @@ class AppRouter {
 
         //User Applicant API
         router.get("/users", this.getApplicants.bind(this));
+        router.get("/user/:userName", this.getUser.bind(this));
 
         //Credentials API
         router.get("/credentials", this.getCred.bind(this));
@@ -135,6 +136,27 @@ class AppRouter {
         })         
     }
 
+    // Get user detail
+    getUser(req, res) {
+        console.log("Get user detail");
+        this.knex("credentials")
+        .where({
+            username: req.params.userName
+        })
+        .first()
+        .then((data) => {
+            this.knex("user_applicant")
+            .join('credentials', 'credentials.id', '=', 'user_applicant.credentials_id')
+            .select("*")
+            .where({
+                credentials_id: data.id
+            })
+            .then((data) => {
+                console.log(data)
+                res.send(data);
+            })
+        })
+    }
 
     // Update user details
     updateUser(req, res) {
