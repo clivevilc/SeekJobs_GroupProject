@@ -1,8 +1,15 @@
+{{! *****************  Navbar / loggedinNavbar ************* }}
+{{#if authenticated}}
+{{>loggedinNavbar}}
+{{else}}
+{{>navbar}}
+{{/if}}
+
 {{! ***************** Home Page ************* }}
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
-    <h1>Welcome to<span>SeekJobs</span></h1>
+    <h1>Welcome to <span>SeekJobs</span></h1>
     <h2>Your dream job is here waiting for you</h2>
     <div class="d-flex">
         <a href="#searchjobs" class="btn-get-started scrollto">Search Jobs</a>

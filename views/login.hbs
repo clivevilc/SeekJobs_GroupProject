@@ -1,3 +1,9 @@
+{{!-- Navbar --}}
+
+{{>navbar}}
+
+
+
 {{! ***************** Login Page ************* }}
 <section id="login" class="vh-100">
     <div class="container py-5 h-100">
@@ -10,7 +16,8 @@
                     />
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form>
+                <form action="/login" method="post">
+                    // action & method ( to be added in the app.js to make the "signin" button works )
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         <h1>Log In</h1>
