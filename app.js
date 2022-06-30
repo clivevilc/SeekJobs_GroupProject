@@ -4,8 +4,7 @@ require("dotenv").config();
 const { urlencoded } = require("express");
 const express = require("express");
 const { engine } = require("express-handlebars");
-// const {engine} = require("express-handlebars");
-// const port = 3000;
+
 
 //Import required modules
 const fs = require("fs");
@@ -25,6 +24,11 @@ const knex = require("knex")(knexConfig)
 const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
 const credService = require("./Services/CredService");
+
+//setup AuthRouter
+const AuthRouter = require("./Routers/authRouter");
+const authRouter = new AuthRouter();
+
 
 /** **************** Configure Express *********************** */
 //Setup Handlebars
@@ -57,7 +61,7 @@ app.use(
     })
   );
 
-// Setup Local Login (***** To Be Done *******)
+// Setup Local Login
 app.use(passportFunctions.initialize());
 app.use(passportFunctions.session());
 
@@ -112,6 +116,7 @@ app.get("/employer/:employerName", (req, res) => {
 
 app.use("/api", new AppRouter(JobService, express, knex).router());
 
+app.use("/", authRouter.router());
 
 //Render Error Page
 

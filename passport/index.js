@@ -25,7 +25,7 @@
 
 const passport = require("passport");
 
-const loginStrategy = require("./loginStrategy.js");
+const loginStrategy = require("./loginStrategy");
 // const signupStrategy = require("./signupStrategy.js");
 const serializeUser = require("./serializeDeserialize")
   .serializeUser;

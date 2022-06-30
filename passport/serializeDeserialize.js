@@ -9,7 +9,7 @@ function serializeUser(user, done) {
     user
   );
 
-  return done(null, user);
+  return done(null, user.id);
 }
 
 // with every request, cookie will be sent back to server. server will take the token, pass it into this function, and turn it into a user
@@ -19,7 +19,7 @@ function deserializeUser(id, done) {
     "Deserialize: server will take token from your browser, and run this function to check if user exists"
   );
   userQueries
-    .getById(id.id)
+    .getById(id) //user id
     .then((users) => {
       if (users.length === 0) {
         return done(null, false);
