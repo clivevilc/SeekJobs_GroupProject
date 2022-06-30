@@ -24,6 +24,7 @@ const knex = require("knex")(knexConfig)
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
+const credService = require("./Services/CredService");
 
 /** **************** Configure Express *********************** */
 //Setup Handlebars
@@ -68,6 +69,11 @@ app.get("/", (req, res) => {
 });
 
 
+//Render job board
+app.get("/searchJobs", (req, res) => {
+    res.render("searchJobs");
+})
+
 //Render user login page
 app.get("/login", (req, res) => {
   res.render("login");
@@ -104,7 +110,7 @@ app.get("/employer/:employerName", (req, res) => {
 
 app.get("*", (req, res) => {
   res.status(404);
-  console.log(`Error 404`);
+  // console.log(`Error 404`);
   res.render("error");
 });
 
