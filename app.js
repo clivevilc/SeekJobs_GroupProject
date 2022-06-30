@@ -43,6 +43,11 @@ app.get("/", (req,res) => {
     res.render("index");
 })
 
+//Render job board
+app.get("/searchJobs", (req, res) => {
+    res.render("searchJobs");
+})
+
 //Render user login page
 app.get("/login", (req, res) =>{
     res.render("login");
