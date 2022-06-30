@@ -65,7 +65,7 @@ app.use(passportFunctions.session());
 /** **************** Configure Job Services *********************** */
 //Render user homepage
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {authenticated: req.isAuthenticated(), username:  req.isAuthenticated() && req.user.username}); //
 });
 
 
@@ -106,19 +106,20 @@ app.get("/employer/:employerName", (req, res) => {
   res.render("employerProfile");
 });
 
-//Render Error Page
-
-app.get("*", (req, res) => {
-  res.status(404);
-  // console.log(`Error 404`);
-  res.render("error");
-});
 
 
 /** **************** Configure Router *********************** */
 
 app.use("/api", new AppRouter(JobService, express, knex).router());
 
+
+//Render Error Page
+
+app.get("*", (req, res) => {
+  res.status(404);
+  console.log(`Error 404`);
+  res.render("error");
+});
 
 //setup port
 app.listen(config, () => {
