@@ -7,9 +7,10 @@ exports.seed = async function(knex) {
   await knex('credentials').del()
   await knex('credentials').insert([
     { username: 'clive', password: '123', user_type: 'applicant'},
-    { username: 'jasmine', password: 'abc', user_type:'employer'},
+    { username: 'meta', password: 'abc', user_type:'employer'},
     { username: 'jeff', password: 'qwe', user_type: 'applicant'},
-    { username: 'bibek', password: 'qwe', user_type: 'employer'},
-    { username: 'sid', password: 'qwe', user_type: 'employer'},
+    { username: 'amazon', password: 'abcd', user_type: 'employer'},
+    { username: 'google', password: '12345', user_type: 'employer'},
+    { username: 'jasmine', password: '12345', user_type: 'applicant'}
   ]);
 };

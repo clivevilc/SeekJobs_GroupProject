@@ -11,6 +11,7 @@ exports.seed = async function(knex) {
     { title: 'Software Engineer', salary: 15000, job_type: "part-time", description:"description here", user_employer_id:2},
     { title: 'Front-end Developer', salary: 12000, job_type: "part-time", description:"description here", user_employer_id:2},
     { title: 'Senior Software Engineer', salary: 45000, job_type: "full-time", description:"description here", user_employer_id:2},
-    { title: 'Sales Specialist', salary: 15000, job_type: "part-time", description:"description here", user_employer_id:3}
+    { title: 'Sales Specialist', salary: 15000, job_type: "part-time", description:"description here", user_employer_id:3},
+    { title: 'UX Designer', salary: 24000, job_type: "full-time", description:"description here", user_employer_id:3}
   ]);
 };

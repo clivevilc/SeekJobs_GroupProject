@@ -35,6 +35,7 @@ class AppRouter {
         //Saved Listing
         router.get("/user/:userName/saved", this.getSavedListing.bind(this));
         router.post("/user/:userName/saved", this.addSavedListing.bind(this));
+        router.delete("/user/:userName/saved", this.deleteSavedListing.bind(this));
 
 
         return router;
@@ -249,7 +250,7 @@ class AppRouter {
     //TODO: CATCH ERROR WHEN USERNAME IS UNDEFINED
     getSavedListing(req, res){
         console.log("View saved listing to saved list");
-        this.knex("credentials")
+        return this.knex("credentials")
         .where({
             username: req.params.userName
         })
@@ -258,7 +259,7 @@ class AppRouter {
         })
         .first()
         .then((data) => {
-            this.knex("user_applicant")
+            return this.knex("user_applicant")
             .select("*")
             .where({
                 credentials_id:data.id
@@ -271,8 +272,6 @@ class AppRouter {
                     applicant_id:data.id
                 })
                 .then((data) => {
-                    console.log(data.length)
-                    console.log(data)
                     res.send(data)
                 })
 /*                 .then((data) =>{
@@ -302,7 +301,7 @@ class AppRouter {
     //Add saved listing
     addSavedListing(req, res) {
         console.log("Add listing to saved table");
-        let user = this.knex("credentials")
+        this.knex("credentials")
         .where({
             username: req.params.userName
         })
@@ -333,8 +332,38 @@ class AppRouter {
 
 
     //Delete saved listing
-
-
+    deleteSavedListing(req, res) {
+        console.log("Delete listing")
+        this.knex("credentials")
+        .where({
+            username: req.params.userName
+        })
+        .andWhere({
+            user_type:"applicant"
+        })
+        .first()
+        .then((data) => {
+            this.knex("user_applicant")
+            .select("*")
+            .where({
+                credentials_id:data.id
+            })
+            .first()
+            .then((data) => {
+                this.knex("saved_listing")
+                .del()
+                .where({
+                    id:req.body.id
+                })
+                .then((data) =>{
+                    console.log("job listing is successfully added to the saved list")
+                    res.send("Saved item deleted")
+                })
+            })
+        })
     }
+        
+    }
+
 
 module.exports = AppRouter;
