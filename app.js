@@ -122,7 +122,7 @@ app.use("/", authRouter.router());
 
 app.get("*", (req, res) => {
   res.status(404);
-  console.log(`Error 404`);
+  //console.log(`Error 404`);
   res.render("error");
 });
 
