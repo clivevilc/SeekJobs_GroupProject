@@ -7,7 +7,8 @@
  const hashFunction = require("./hashFunction");
  const knex = require("knex")(development);
  const TABLE_NAME = "credentials";
- const LocalStrategy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
+ const crypto = require('crypto')
  /**********************************************
  
   ***********************************************/
@@ -27,7 +28,7 @@
      // otherwise, get the user
      let user = users[0];
  
-     console.log("User is ", user);
+     console.log("User is ", user.username);
      console.log("User password", user.password);
      // check their password
      let result = await hashFunction.checkPassword(password, user.hash);
@@ -46,3 +47,5 @@
    }
  });
  
+
+ /// Sign Up Page
