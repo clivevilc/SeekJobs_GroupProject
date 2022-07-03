@@ -27,7 +27,7 @@
      // otherwise, get the user
      let user = users[0];
  
-     console.log("User", user);
+     console.log("User is ", user);
      console.log("User password", user.password);
      // check their password
      let result = await hashFunction.checkPassword(password, user.hash);
