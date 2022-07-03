@@ -6,11 +6,12 @@ exports.seed = async function(knex) {
   // Deletes ALL existing entries
   await knex('credentials').del()
   await knex('credentials').insert([
-    { username: 'clive', password: '123', user_type: 'applicant'},
-    { username: 'meta', password: 'abc', user_type:'employer'},
-    { username: 'jeff', password: 'qwe', user_type: 'applicant'},
-    { username: 'amazon', password: 'abcd', user_type: 'employer'},
-    { username: 'google', password: '12345', user_type: 'employer'},
-    { username: 'jasmine', password: '12345', user_type: 'applicant'}
+
+    { username: 'clive', password: '123', user_type: 'applicant', hash:'$2b$10$zEhr.mtUzcmInboERD6eAOQiC82N6TWsB8kHJyTMSL5HtacRFDfmm'},
+    { username: 'jasmine', password: 'abc', user_type:'employer', hash:'$2b$10$qCPvpFkliAuGGu0c/jgtzOipFrHLvtophfm7HICN1zhkEN/Gy1tnG'},
+    { username: 'jeff', password: 'qwe', user_type: 'applicant', hash:'$2b$10$y2WqG.3lm/fDWjFvq15vb.swRoXZT18Tets/CyITWcy7wBQteWBxy'},
+    { username: 'bibek', password: 'qwe', user_type: 'employer', hash:'$2b$10$y2WqG.3lm/fDWjFvq15vb.swRoXZT18Tets/CyITWcy7wBQteWBxy'},
+    { username: 'sid', password: 'qwe', user_type: 'employer', hash:'$2b$10$y2WqG.3lm/fDWjFvq15vb.swRoXZT18Tets/CyITWcy7wBQteWBxy'},
+
   ]);
 };
