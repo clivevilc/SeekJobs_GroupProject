@@ -19,7 +19,7 @@ function deserializeUser(id, done) {
     "Deserialize: server will take token from your browser, and run this function to check if user exists"
   );
   userQueries
-    .getById(id) //user id
+    .getById(id) // user id is unique
     .then((users) => {
       if (users.length === 0) {
         return done(null, false);

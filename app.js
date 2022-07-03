@@ -25,9 +25,12 @@ const AppRouter = require("./Routers/AppRouter");
 const JobService = require("./Services/JobServices");
 const credService = require("./Services/CredService");
 
-//setup AuthRouter
+//setup AuthRouter & ViewRouter
 const AuthRouter = require("./Routers/authRouter");
 const authRouter = new AuthRouter();
+const ViewRouter = require("./Routers/viewRouter")
+const viewRouter = new ViewRouter();
+
 
 
 /** **************** Configure Express *********************** */
@@ -42,12 +45,13 @@ app.engine("hbs", engine ({
 
 //Setup Express middlewares
 app.use(express.static("public"));
-app.use(urlencoded({ extended: false }));
+app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
 //Setup Auth (***** To Be Done *******)
 const passportFunctions = require("./passport")
 const expressSession = require("express-session");
+const isLoggedIn = require("./authFunctions/auth");
 
 app.use(
     // Creating a new session generates a new session id, stores that in a session cookie, and
@@ -69,7 +73,8 @@ app.use(passportFunctions.session());
 /** **************** Configure Job Services *********************** */
 //Render user homepage
 app.get("/", (req, res) => {
-  res.render("index", {authenticated: req.isAuthenticated(), username:  req.isAuthenticated() && req.user.username}); //
+  res.render("index", {authenticated: req.isAuthenticated(), username:  req.isAuthenticated() && req.user.username});
+   //
 });
 
 
@@ -78,9 +83,10 @@ app.get("/searchJobs", (req, res) => {
     res.render("searchJobs");
 })
 
-//Render user login page
+// //Render user login page
 app.get("/login", (req, res) => {
   res.render("login");
+  // console.log()
 });
 
 //Render user profile page (***** To Be Done *******)
@@ -90,7 +96,12 @@ app.get("user/:userName", (req, res) => {
 });
 
 app.get("/user", (req, res) => {
-    res.render("user");
+  res.render("user", {
+    authenticated: req.isAuthenticated(),
+    username: req.isAuthenticated() && req.user.username,
+    // username: "Clive",
+    first_name: req.isAuthenticated() && req.user.first_name,
+  });
   });
 
 //Render user application status page
@@ -115,8 +126,8 @@ app.get("/employer/:employerName", (req, res) => {
 /** **************** Configure Router *********************** */
 
 app.use("/api", new AppRouter(JobService, express, knex).router());
-
 app.use("/", authRouter.router());
+// app.use("/", viewRouter.router());
 
 //Render Error Page
 
