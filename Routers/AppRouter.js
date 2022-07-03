@@ -13,14 +13,17 @@ class AppRouter {
         let router = this.express.Router();
 
         //Jobs API
-        router.get("/jobs", this.getJobs.bind(this));
-        router.post("/", this.post.bind(this));
+        router.get("/listing", this.getAllListing.bind(this));
+        router.get("/listing/:userName", this.getListing.bind(this));
+        router.post("/listing/:userName", this.postListing.bind(this));
         //router.put
         //router.delete
 
         //User Applicant API
-        router.get("/users", this.getApplicants.bind(this));
-        router.get("/user/:userName", this.getUser.bind(this));
+        router.get("/users", this.getAllApplicants.bind(this));
+        router.get("/user/:userName", this.getApplicant.bind(this));
+        router.put("/user/:userName", this.updateApplicant.bind(this));
+        
 
         //Credentials API
         router.get("/credentials", this.getCred.bind(this));
@@ -29,15 +32,19 @@ class AppRouter {
         //router.put("/:userName", this.updateCred.bind(this));
         router.delete("/credential/:userName", this.deleteCred.bind(this));
 
-        router.put("/credential/:userName", this.updateUser.bind(this));
-
+        //Saved Listing
+        router.get("/user/:userName/saved", this.getSavedListing.bind(this));
+        router.post("/user/:userName/saved", this.addSavedListing.bind(this));
+        router.delete("/user/:userName/saved", this.deleteSavedListing.bind(this));
 
 
         return router;
     }
 
+    //Job listing Routers ////////////////////////////////////////
+
     //getJobs Method
-    getJobs(req,res) {
+    getAllListing(req,res) {
         // console.log("GET")
         this.knex('user_employer')
             .join('job_listing', 'user_employer.id', '=', 'job_listing.user_employer_id')
@@ -48,11 +55,64 @@ class AppRouter {
             });
     }
 
-    //postJobs Method
-    // TODO: create post update and delete jobs. Do after finishing the appicant-end side
-    post(req, res) {
-        console.log("POST")
+    //Get listing posted by an employer
+    getListing(req, res) {
+        this.knex("credentials")
+        .where({
+            username: req.params.userName
+        })
+        .andWhere({
+            user_type:"employer"
+        })
+        .first()
+        .then((data) => {
+            this.knex("user_employer")
+            .join('job_listing', 'user_employer.id', '=', 'job_listing.user_employer_id')
+            .select("*")
+            .where({
+                credentials_id: data.id
+            })
+            .then((data) => {
+                console.log(data)
+                res.send(data);
+            })
+        })
+
     }
+
+    //postJob Method
+    // TODO: create post update and delete jobs. Do after finishing the appicant-end side
+    postListing(req, res) {
+        console.log("POST new job listing");
+        this.knex('credentials')
+            .where({
+                username: req.params.userName
+            })
+            .andWhere({
+                user_type:"employer"
+            })
+            .first()
+            .then((data) =>{
+                this.knex("job_listing")
+                .insert({
+                    title: req.body.title,
+                    salary: req.body.salary,
+                    job_type: req.body.job_type,
+                    description: req.body.description,
+                    user_employer_id: data.id
+                })
+                .where({
+                    credentials_id: data.id
+                })
+                .then((data) =>{
+                    console.log("New job listing successfully added")
+                    res.send(data)
+                })
+            })
+    }
+
+
+    //Credentials Routers /////////////////////////////////////////
 
     //Get credentials
     getCred(req, res) {
@@ -87,7 +147,7 @@ class AppRouter {
             username:req.params.userName})
         .select("*")
         .then((data) => {
-            console.log(data)
+            //console.log(data)
             res.json(data)
         })
     }
@@ -121,8 +181,10 @@ class AppRouter {
         })
     }
 
+    //User Applicant Routers /////////////////////////////////////////////
+
     //getUser Method
-    getApplicants(req, res) {
+    getAllApplicants(req, res) {
         console.log("Get all user applicant data");
         this.knex("user_applicant")
         .join('credentials', 'credentials.id', '=', 'user_applicant.credentials_id')
@@ -131,13 +193,13 @@ class AppRouter {
         })
         .select('*')
         .then((data) => {
-            console.log(data);
+            //console.log(data);
             res.json(data);
         })         
     }
 
     // Get user detail
-    getUser(req, res) {
+    getApplicant(req, res) {
         console.log("Get user detail");
         this.knex("credentials")
         .where({
@@ -152,14 +214,14 @@ class AppRouter {
                 credentials_id: data.id
             })
             .then((data) => {
-                console.log(data)
+                //console.log(data)
                 res.send(data);
             })
         })
     }
 
     // Update user details
-    updateUser(req, res) {
+    updateApplicant(req, res) {
         console.log("Update user detail");
         this.knex("credentials")
         .where({
@@ -176,13 +238,132 @@ class AppRouter {
                 credentials_id: data.id
             })
             .then((data) => {
-                console.log(data)
+                //console.log(data)
                 res.send("information successfully updated");
             })
         })
     }
 
+    // Saved Listing ///////////////////////////////////////////
 
+    //Get saved listing
+    //TODO: CATCH ERROR WHEN USERNAME IS UNDEFINED
+    getSavedListing(req, res){
+        console.log("View saved listing to saved list");
+        return this.knex("credentials")
+        .where({
+            username: req.params.userName
+        })
+        .andWhere({
+            user_type:"applicant"
+        })
+        .first()
+        .then((data) => {
+            return this.knex("user_applicant")
+            .select("*")
+            .where({
+                credentials_id:data.id
+            })
+            .first()
+            .then((data) => {
+                return this.knex("saved_listing")
+                .select("*")
+                .where({
+                    applicant_id:data.id
+                })
+                .then((data) => {
+                    res.send(data)
+                })
+/*                 .then((data) =>{
+                    //res.send(data)
+                    for(let i=0; i <= data.length; i++){
+                        return this.knex("job_listing")
+                        .select(
+                            "id", 
+                            "title", 
+                            "salary", 
+                            "job_type", 
+                            "description")
+                        .where({
+                            id:data[i].listing_id
+                        })
+                        .then((data) =>{
+                            console.log(data)
+                            res.send(data)
+                        })
+                    }
+                }) */
+            })
+        })
     }
+
+
+    //Add saved listing
+    addSavedListing(req, res) {
+        console.log("Add listing to saved table");
+        this.knex("credentials")
+        .where({
+            username: req.params.userName
+        })
+        .andWhere({
+            user_type:"applicant"
+        })
+        .first()
+        .then((data) => {
+            this.knex("user_applicant")
+            .select("*")
+            .where({
+                credentials_id:data.id
+            })
+            .first()
+            .then((data) => {
+                this.knex("saved_listing")
+                .insert({
+                    applicant_id:data.id,
+                    listing_id:req.body.listing_id
+                })
+                .then((data) =>{
+                    console.log("job listing is successfully added to the saved list")
+                    res.send(data)
+                })
+            })
+        })
+    }
+
+
+    //Delete saved listing
+    deleteSavedListing(req, res) {
+        console.log("Delete listing")
+        this.knex("credentials")
+        .where({
+            username: req.params.userName
+        })
+        .andWhere({
+            user_type:"applicant"
+        })
+        .first()
+        .then((data) => {
+            this.knex("user_applicant")
+            .select("*")
+            .where({
+                credentials_id:data.id
+            })
+            .first()
+            .then((data) => {
+                this.knex("saved_listing")
+                .del()
+                .where({
+                    id:req.body.id
+                })
+                .then((data) =>{
+                    console.log("job listing is successfully added to the saved list")
+                    res.send("Saved item deleted")
+                })
+            })
+        })
+    }
+        
+    }
+
 
 module.exports = AppRouter;
