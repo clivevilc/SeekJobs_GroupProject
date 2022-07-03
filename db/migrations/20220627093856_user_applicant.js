@@ -7,6 +7,9 @@ exports.up = function(knex) {
     table.increments().primary();
     table.string("first_name").notNullable();
     table.string("last_name").notNullable();
+    table.string("email");
+    table.string("phone");
+    table.string("address");
     table.boolean("upload_cv");
     table.integer("credentials_id").unsigned();
     table.foreign("credentials_id").references("credentials.id");

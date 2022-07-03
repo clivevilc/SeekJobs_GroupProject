@@ -95,6 +95,10 @@ app.get("user/:userName", (req, res) => {
   res.render("user");
 });
 
+app.get("/saved", (req, res) => {
+  res.render("savedListing");
+});
+
 app.get("/user", (req, res) => {
   res.render("user", {
     authenticated: req.isAuthenticated(),
@@ -133,7 +137,7 @@ app.use("/", authRouter.router());
 
 app.get("*", (req, res) => {
   res.status(404);
-  console.log(`Error 404`);
+  //console.log(`Error 404`);
   res.render("error");
 });
 
