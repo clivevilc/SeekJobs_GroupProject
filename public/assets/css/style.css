@@ -598,3 +598,12 @@ background: #eee;
 footer {
   font-size: 12px;
 }
+/*--------------------------------------------------------------
+# Register Page
+--------------------------------------------------------------*/
+
+p.help {
+	text-align: left;
+	font-weight: 300;
+  font-size: 14px ;
+}
