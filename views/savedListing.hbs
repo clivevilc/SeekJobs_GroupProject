@@ -1,62 +1,11 @@
-<h1>Saved Listing</h1>
-
-<!-- Main Contents -->
-<div id="content" class="clearfix">
-  <!-- CARDS: 
-        company logo | company name | posting time
-        job title
-        location
-        preview of job requirement/description/...
-
-        => elaborate: static to dynamic
-  -->
-  {{!-- LEFT COLUMN --}}
-  <div id="left-column-jobs">
-    <div class="card">
-      <div>
-        <h3>Google</h3>
-        <img src="/assets/img/logo_google.png" alt="company logo" class="company-logo">
+<div class="container my-5">
+      <div class="text-center">
+        <h1 class="display-4 text-center mb-3">Saved Listing</h1>
+        <button class="btn btn-primary my-3" id="get">GET</button>
+        <button class="btn btn-info" id="post">ADD</button>
+        <button class="btn btn-danger" id="delete">DELETE</button>
       </div>
-      <h4>Software Engineer</h4>
-      <h5>Hong Kong</h5>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec lorem mauris. Nulla fermentum tincidunt nulla et dignissim. In porttitor sem id velit lobortis aliquam. Duis et purus ac orci porttitor luctus at quis leo. Mauris vulputate pellentesque est, sit amet egestas tellus facilisis sit amet. Cras sodales bibendum tellus, a gravida tortor hendrerit sed. Pellentesque blandit posuere nisl, sit amet cursus nisl dignissim non.
-      </p>
+      <hr />
+      <div id="res"></div>
     </div>
-    <div id="column-jobs" class="card">
-      <div>
-        <h3>Accenture</h3>
-        <img src="/assets/img/logo_accenture.png" alt="company logo" class="company-logo">
-      </div>
-      <h4>Full-stack Web Developer</h4>
-      <h5>Berlin</h5>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec lorem mauris. Nulla fermentum tincidunt nulla et dignissim. In porttitor sem id velit lobortis aliquam. Duis et purus ac orci porttitor luctus at quis leo. Mauris vulputate pellentesque est, sit amet egestas tellus facilisis sit amet. Cras sodales bibendum tellus, a gravida tortor hendrerit sed. Pellentesque blandit posuere nisl, sit amet cursus nisl dignissim non.
-      </p>
-    </div>
-    <div id="column-jobs" class="card">
-      <div>
-        <h3>Microsoft</h3>
-        <img src="/assets/img/logo_microsoft.png" alt="company logo" class="company-logo">
-      </div>
-      <h4>Data Scientist</h4>
-      <h5>Vancouver</h5>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec lorem mauris. Nulla fermentum tincidunt nulla et dignissim. In porttitor sem id velit lobortis aliquam. Duis et purus ac orci porttitor luctus at quis leo. Mauris vulputate pellentesque est, sit amet egestas tellus facilisis sit amet. Cras sodales bibendum tellus, a gravida tortor hendrerit sed. Pellentesque blandit posuere nisl, sit amet cursus nisl dignissim non.
-      </p>
-    </div>  
-  </div>
-  {{!-- RIGHT COLUMN --}}
-  <div id="right-column-job-details">
-    <h3>Job Detail</h3>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec lorem mauris. Nulla fermentum tincidunt nulla et dignissim. In porttitor sem id velit lobortis aliquam. Duis et purus ac orci porttitor luctus at quis leo. Mauris vulputate pellentesque est, sit amet egestas tellus facilisis sit amet. Cras sodales bibendum tellus, a gravida tortor hendrerit sed. Pellentesque blandit posuere nisl, sit amet cursus nisl dignissim non.
-    </p>
-    <p>
-      Fusce ultricies, lorem eu interdum accumsan, mauris eros lacinia ligula, nec facilisis turpis nisl et ligula. Phasellus tincidunt congue interdum. Suspendisse potenti. Nam malesuada molestie libero et fermentum. Cras imperdiet lacus a lectus suscipit quis tincidunt libero dictum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac nulla nisi. Sed velit urna, pellentesque et lobortis ut, pharetra ac lacus. Nam a tellus tortor, non ultrices sapien. Curabitur feugiat dapibus ligula, nec sollicitudin elit ultricies ac. Quisque luctus tincidunt neque vel varius. Integer tincidunt, neque ut pretium sollicitudin, nulla nisl sollicitudin massa, eu aliquam justo eros at lacus.
-    </p>
-    <p>
-      venenatis sollicitudin. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam id semper nibh. In eu sagittis tellus. Nunc risus libero, adipiscing vitae sollicitudin lobortis, molestie sit amet arcu. Aenean vulputate varius porttitor.
-      Curabitur laoreet volutpat interdum. Aliquam erat volutpat. Vestibulum et est ut dolor condimentum fringilla. Vivamus blandit, neque a dictum rutrum, odio est ornare risus, ut mattis augue dolor et urna. Sed magna orci, porttitor euismod hendrerit vitae, tristique congue sapien. Pellentesque cursus commodo ante non convallis. Duis quis leo at augue congue vulputate. Praesent porta dapibus dapibus. Integer commodo, lacus nec dignissim consectetur, massa arcu mollis velit, et lobortis sapien nibh ut dolor. Duis condimentum venenatis sollicitudin. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam id semper nibh. In eu sagittis tellus. Nunc risus libero, adipiscing vitae sollicitudin lobortis, molestie sit amet arcu. Aenean vulputate varius porttitor.</p>
-  </div>
-</div>
+
