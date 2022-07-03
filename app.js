@@ -89,6 +89,11 @@ app.get("/login", (req, res) => {
   // console.log()
 });
 
+//Render Register page
+app.get("/register", (req, res) => {
+  res.render("register")
+})
+
 //Render user profile page (***** To Be Done *******)
 
 app.get("user/:userName", (req, res) => {
