@@ -9,7 +9,7 @@
         table.string("hash").notNullable();
         table.string("password").notNullable();
         table.string("user_type").notNullable();
-        table.string("hash");
+
         table.timestamps(false, true);
         })
   
