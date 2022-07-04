@@ -5,20 +5,19 @@ const { urlencoded } = require("express");
 const express = require("express");
 const { engine } = require("express-handlebars");
 
-
 //Import required modules
 const fs = require("fs");
 const path = require("path");
-const passport = require("passport")
-const bcrypt = require("bcrypt")
+const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 //In-built modules (filesystem and path)
 const app = express();
-const config = require("./config.json").development; 
+const config = require("./config.json").development;
 
 // Set up pg connection with knex
 const knexConfig = require("./db/knexfile").development;
-const knex = require("knex")(knexConfig)
+const knex = require("knex")(knexConfig);
 
 //setup applications
 const AppRouter = require("./Routers/AppRouter");
@@ -28,20 +27,21 @@ const credService = require("./Services/CredService");
 //setup AuthRouter & ViewRouter
 const AuthRouter = require("./Routers/authRouter");
 const authRouter = new AuthRouter();
-const ViewRouter = require("./Routers/viewRouter")
+const ViewRouter = require("./Routers/viewRouter");
 const viewRouter = new ViewRouter();
-
-
 
 /** **************** Configure Express *********************** */
 //Setup Handlebars
 app.set("view engine", "hbs");
-app.engine("hbs", engine ({
+app.engine(
+  "hbs",
+  engine({
     extname: "hbs",
     defaultLayout: "main",
     layoutsDir: `${__dirname}/views/layouts`,
-    partialsDir: `${__dirname}/views/partials`
-}));
+    partialsDir: `${__dirname}/views/partials`,
+  })
+);
 
 //Setup Express middlewares
 app.use(express.static("public"));
@@ -49,44 +49,50 @@ app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
 //Setup Auth (***** To Be Done *******)
-const passportFunctions = require("./passport")
+const passportFunctions = require("./passport");
 const expressSession = require("express-session");
-const isLoggedIn = require("./authFunctions/auth");
+const isLoggedIn = require("./authFunctions/auth").isLoggedIn;
 
 app.use(
-    // Creating a new session generates a new session id, stores that in a session cookie, and
-    expressSession({
-      secret: "secret",
-      // save the user
-      // if false, will not save session to browser
-      resave: true,
-      // if saveUninitialized is false, session object will not be stored in sesion store
-      saveUninitialized: true,
-    })
-  );
+  // Creating a new session generates a new session id, stores that in a session cookie, and
+  expressSession({
+    secret: "secret",
+    // save the user
+    // if false, will not save session to browser
+    resave: true,
+    // if saveUninitialized is false, session object will not be stored in sesion store
+    saveUninitialized: true,
+  })
+);
 
 // Setup Local Login
 app.use(passportFunctions.initialize());
 app.use(passportFunctions.session());
 
-
 /** **************** Configure Job Services *********************** */
 //Render user homepage
 app.get("/", (req, res) => {
-  res.render("index", {authenticated: req.isAuthenticated(), username:  req.isAuthenticated() && req.user.username});
-   //
+  res.render("index", {
+    authenticated: req.isAuthenticated(),
+    username: req.isAuthenticated() && req.user.username,
+  });
+  //
 });
-
 
 //Render job board
 app.get("/searchJobs", (req, res) => {
-    res.render("searchJobs");
-})
+  res.render("searchJobs");
+});
 
 // //Render user login page
 app.get("/login", (req, res) => {
   res.render("login");
   // console.log()
+});
+
+// Render Sign Up Page
+app.get("/register", (req, res) => {
+  res.render("register");
 });
 
 //Render user profile page (***** To Be Done *******)
@@ -100,13 +106,17 @@ app.get("/saved", (req, res) => {
 });
 
 app.get("/user", (req, res) => {
-  res.render("user", {
-    authenticated: req.isAuthenticated(),
-    username: req.isAuthenticated() && req.user.username,
-    // username: "Clive",
-    first_name: req.isAuthenticated() && req.user.first_name,
-  });
-  });
+  res.render(
+    "user",
+    isLoggedIn
+    // {
+    // authenticated: req.isAuthenticated(),
+    // username: req.isAuthenticated() && req.user.username,
+    // // username: "Clive",
+    // first_name: req.isAuthenticated() && req.user.first_name,
+    // }
+  );
+});
 
 //Render user application status page
 
@@ -124,8 +134,6 @@ app.get("/addjob", (req, res) => {
 app.get("/employer/:employerName", (req, res) => {
   res.render("employerProfile");
 });
-
-
 
 /** **************** Configure Router *********************** */
 

@@ -7,7 +7,7 @@ class AuthRouter{
         let router = express.Router();
 
         router.post(
-            "/signup",
+            "/register",
             passportFunctions.authenticate("local-signup", {
               successRedirect: "/",
               failureRedirect: "/error",
@@ -28,9 +28,6 @@ class AuthRouter{
         return router;
     }
 }
-
-
-
 
 
 module.exports = AuthRouter;
