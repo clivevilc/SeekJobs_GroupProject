@@ -43,7 +43,7 @@ class AppRouter {
             .join('job_listing', 'user_employer.id', '=', 'job_listing.user_employer_id')
             .select('*')
             .then((data) =>{
-                //console.log(data);
+                // console.log(data);
                 res.json(data);
             });
     }

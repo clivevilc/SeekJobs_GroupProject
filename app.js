@@ -4,8 +4,6 @@ require("dotenv").config();
 const { urlencoded } = require("express");
 const express = require("express");
 const { engine } = require("express-handlebars");
-// const {engine} = require("express-handlebars");
-// const port = 3000;
 
 //Import required modules
 const fs = require("fs");
@@ -61,13 +59,11 @@ app.use(
 app.use(passportFunctions.initialize());
 app.use(passportFunctions.session());
 
-
 /** **************** Configure Job Services *********************** */
 //Render user homepage
 app.get("/", (req, res) => {
   res.render("index");
 });
-
 
 //Render job board
 app.get("/searchJobs", (req, res) => {
@@ -108,19 +104,39 @@ app.get("/employer/:employerName", (req, res) => {
 
 //Render Error Page
 
-app.get("*", (req, res) => {
+app.get("/api", (req, res) => {
   res.status(404);
   // console.log(`Error 404`);
   res.render("error");
 });
 
-
 /** **************** Configure Router *********************** */
-
 app.use("/api", new AppRouter(JobService, express, knex).router());
-
 
 //setup port
 app.listen(config, () => {
   console.log(`Listening to ${config.port}`);
+});
+
+
+
+
+
+
+
+
+
+
+// ----------------- TESTING -----------------
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const jobListingData = require('./joblisting');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static('public'));
+
+app.get('/api/joblisting', (req, res) => {
+  res.send(jobListingData);
 });
