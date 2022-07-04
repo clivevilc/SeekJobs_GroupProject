@@ -87,7 +87,7 @@ app.get("/searchJobs", (req, res) => {
 // //Render user login page
 app.get("/login", (req, res) => {
   res.render("login");
-  // console.log()
+
 });
 
 //Render Register page
@@ -110,27 +110,30 @@ app.get("user/:userName", (req, res) => {
 
   });
 });
-
-app.get("/user/:userName/saved", (req, res) => {
-  res.render("savedListing", {
-    username:req.params.userName
-  });
-});
-
-
+// Below is duplicated ?? ()
 app.get("/user/:userName", (req, res) => {
 
   res.render("user", {
-    username:req.params.userName
+    username: req.isAuthenticated() && req.user.username,
+    //
+    first_name: req.isAuthenticated() && req.user.first_name,
   });
 });
 
-app.get("/users", (req, res) => {
+app.get("/user/:userName/saved", (req, res) => {
+  res.render("savedListing", {
+    username: req.params.userName
+  });
+});
+
+
+app.get("/user", (req, res) => {
   res.render("user", {
     authenticated: req.isAuthenticated(),
     username: req.isAuthenticated() && req.user.username,
     // username: "Clive",
     first_name: req.isAuthenticated() && req.user.first_name,
+    
   });
   });
 
@@ -160,11 +163,11 @@ app.use("/", authRouter.router());
 
 //Render Error Page
 
-/* app.get("*", (req, res) => {
+ app.get("*", (req, res) => {
   res.status(404);
   //console.log(`Error 404`);
   res.render("error");
-}); */
+}); 
 
 //setup port
 app.listen(config, () => {

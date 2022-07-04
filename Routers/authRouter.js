@@ -9,7 +9,7 @@ class AuthRouter{
         router.post(
             "/register",
             passportFunctions.authenticate("local-signup", {
-              successRedirect: "/",
+              successRedirect: "/login",
               failureRedirect: "/error",
             })
           );
