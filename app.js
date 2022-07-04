@@ -97,14 +97,34 @@ app.get("/register", (req, res) => {
 //Render user profile page (***** To Be Done *******)
 
 app.get("user/:userName", (req, res) => {
-  res.render("user");
+  const requestedUser = _.lowerCase(req.params.userName);
+  console.log(requestedUser);
+  
+  res.render("user", {
+      first_name:"first_name",
+      last_name:"last_name",
+      email:"email",
+      phone:"phone",
+      address:"address"
+
+  });
 });
 
-app.get("/saved", (req, res) => {
-  res.render("savedListing");
+app.get("/user/:userName/saved", (req, res) => {
+  res.render("savedListing", {
+    username:req.params.userName
+  });
 });
 
-app.get("/user", (req, res) => {
+
+app.get("/user/:userName", (req, res) => {
+
+  res.render("user", {
+    username:req.params.userName
+  });
+});
+
+app.get("/users", (req, res) => {
   res.render("user", {
     authenticated: req.isAuthenticated(),
     username: req.isAuthenticated() && req.user.username,
@@ -140,11 +160,11 @@ app.use("/", authRouter.router());
 
 //Render Error Page
 
-app.get("*", (req, res) => {
+/* app.get("*", (req, res) => {
   res.status(404);
   //console.log(`Error 404`);
   res.render("error");
-});
+}); */
 
 //setup port
 app.listen(config, () => {
