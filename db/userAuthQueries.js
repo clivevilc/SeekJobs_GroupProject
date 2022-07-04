@@ -1,11 +1,11 @@
 //user queries that could link 
-const development = require("./knexfile").development;
+const development = require("../db/knexfile").development;
 const knex = require("knex")(development);
 const hashFunction = require("../passport/hashFunction")
 const TABLE_NAME = "credentials"
 
 function getByID(id) {
-    return knex(TABLE_NAME).select("id").where("id", id);
+    return knex(TABLE_NAME).select("id", "username").where("id", id);
 }
 
 function verify(username, password) {
