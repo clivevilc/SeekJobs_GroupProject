@@ -90,10 +90,10 @@ app.get("/login", (req, res) => {
   // console.log()
 });
 
-// Render Sign Up Page
+//Render Register page
 app.get("/register", (req, res) => {
-  res.render("register");
-});
+  res.render("register")
+})
 
 //Render user profile page (***** To Be Done *******)
 
