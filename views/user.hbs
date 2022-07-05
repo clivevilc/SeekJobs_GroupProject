@@ -6,6 +6,7 @@
 <div id="userProfile"></div>
 {{!-- <button class="btn btn-primary my-3" id="getProf">GET</button> --}}
 
+
 {{#each profile}}   
     <section id="userprofile">
     <div class="container py-5">
@@ -32,7 +33,8 @@
                             class="rounded-circle img-fluid" style="width:
                             110px;">
                         <br>
-                        <h5 class="my-3"> {{first_name}} {{last_name}}</h5>
+                        {{!-- <h5 class="my-3"> {{first_name}} {{last_name}}</h5> --}}
+                        <h5 class="my-3"> {{username}} </h5>
                         <p class="text-muted mb-1">Full Stack Developer</p>
                         <p class="text-muted mb-4">Hong Kong SAR</p>
                         <div class="d-flex justify-content-center mb-2">
@@ -52,7 +54,7 @@
                                 <p class="mb-0">First Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{first_name}}</p>
+                                <p class="text-muted mb-0">{{username}}</p>
                             </div>
                         </div>
                         <hr>
@@ -146,3 +148,4 @@
     </div>
 </section>
 {{/each}}
+

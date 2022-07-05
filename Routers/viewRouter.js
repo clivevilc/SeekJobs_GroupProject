@@ -12,7 +12,7 @@ class ViewRouter {
         let router = this.express.Router();
 
         router.get("/", this.getHome.bind(this));
-        router.get("/signup", this.getSignup.bind(this));
+        router.get("/register", this.getSignup.bind(this));
         router.get("/login", this.getLogin.bind(this));
         router.get("/user", this.getUserPage.bind(this));
         router.get("/error", this.getError.bind(this));
