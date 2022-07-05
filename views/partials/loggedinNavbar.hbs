@@ -3,26 +3,30 @@
 <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
         <!-- Logo -->
-        <a href="/" class="logo"><img
-                src="/assets/img/logo_transparent.png"
-                alt="SeekJobsLogo"
-                /></a>
+        <a href="/" class="logo"><img src="/assets/img/logo_transparent.png" alt="SeekJobsLogo" /></a>
 
         <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto " href="/">Home</a></li>
-                    <li>
-                        <a class="nav-link scrollto"href="#">Search Jobs</a>
-                    </li>
-                    <li><a class="nav-link scrollto"href="#">Team</a></li>
+            <ul>
+                <li><a class="nav-link scrollto " href="/">Home</a></li>
+                <li>
+                    <a class="nav-link scrollto" href="#">Search Jobs</a>
+                </li>
+                <li><a class="nav-link scrollto" href="#">Team</a></li>
 
-                    {{!-- User --}}
-                    <li><a class="nav-link scrollto" href="/user">{{username}}</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-                </div>
-            </nav>
-        <!-- End of navbar -->
+                {{!-- User --}}
+                <li><a class="nav-link scrollto" href="/user">{{username}}</a></li>
+
+                {{!-- Logout Button --}}
+                <li>
+                   <form action="/logout" method="POST">
+                            <button type="submit" class="btn btn-light">
+                                <i class="fa-solid fa-arrow-right-from-bracket">
+                            </i></button></form>
+                </li>
+            </ul>
+    </nav>
     </div>
+    <!-- End of navbar -->
+
 </header>
 <!-- End of Header -->
