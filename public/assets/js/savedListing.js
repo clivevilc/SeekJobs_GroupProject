@@ -40,7 +40,22 @@ const getSaved = () => {
         })
 }
 
-//delete listing
+
+// AXIOS INSTANCES
+
+const reloadListing = (listings) => {
+  // code here
+  console.log("RELOADING");
+  $("#res").html(listingTemplate({ listings: listings }));
+};
+
+// Event listeners
+document.getElementById('get').addEventListener('click', getSaved);
+
+
+
+
+/* //delete listing
 // Add an event listener onto the buttons that we generate along with each note, we target the class remove and listen for a click event.
 $("#res").on("click", ".remove", (event) => {
   // show saving message on DOM
@@ -56,29 +71,4 @@ $("#res").on("click", ".remove", (event) => {
       //endSaving(e.currentTarget);
       alert(e);
     })
-});
-
-// AXIOS INSTANCES
-
-const reloadListing = (listings) => {
-    // code here
-    console.log("RELOADING");
-    $("#res").html(listingTemplate({ listings: listings }));
-  };
-  
-  // Event listeners
-  document.getElementById('get').addEventListener('click', getSaved);
-
-/*   document.getElementById('post').addEventListener('click', addTodo);
-  document.getElementById('update').addEventListener('click', updateTodo);
-  document.getElementById('delete').addEventListener('click', removeTodo);
-  document.getElementById('sim').addEventListener('click', getData);
-  document.getElementById('headers').addEventListener('click', customHeaders);
-  document
-    .getElementById('transform')
-    .addEventListener('click', transformResponse);
-  document.getElementById('error').addEventListener('click', errorHandling);
-  document.getElementById('cancel').addEventListener('click', cancelToken); */
-
-
-  
+}); */
