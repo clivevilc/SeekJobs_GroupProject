@@ -124,6 +124,7 @@ app.get("/employer/:employerName", (req, res) => {
   res.render("employerProfile");
 });
 
+
 /** **************** Configure Router *********************** */
 
 app.use("/api", new AppRouter(JobService, express, knex).router());
@@ -131,6 +132,11 @@ app.use("/", authRouter.router());
 app.use("/", viewRouter.router());
 
 //Render Error Page
+app.get("/usererror", (req, res) => {
+  res.status(404);
+  //console.log(`Error 404`);
+  res.render("usererror");
+}); 
 
  app.get("*", (req, res) => {
   res.status(404);
