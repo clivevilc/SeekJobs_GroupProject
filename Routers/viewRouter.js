@@ -12,7 +12,7 @@ class ViewRouter {
         let router = this.express.Router();
 
         router.get("/", this.getHome.bind(this));
-        router.get("/register", this.getSignup.bind(this));
+        router.get("/signup", this.getSignup.bind(this));
         router.get("/login", this.getLogin.bind(this));
         router.get("/user", this.getUserPage.bind(this));
         router.get("/error", this.getError.bind(this));
@@ -45,7 +45,8 @@ class ViewRouter {
     
         this.knex("credentials")
         .where({
-            username: req.params.userName
+            //username: req.params.userName
+            username: req.user.username
         })
         .first()
         .then((data) => {
@@ -57,7 +58,9 @@ class ViewRouter {
             })
             .then((data) => {
                 //console.log(data)
-                res.render("user", {profile: data});
+                res.render("user", {
+                    profile: data,
+                    username: req.isAuthenticated() && req.user.username});
             })
         })
     };
@@ -67,7 +70,8 @@ class ViewRouter {
         console.log("render saved run")
         return this.knex("credentials")
         .where({
-            username: req.params.userName
+            //username: req.params.userName
+            username: req.user.username
         })
         .andWhere({
             user_type:"applicant"
@@ -108,12 +112,11 @@ class ViewRouter {
             })
             .then((data) => {
             //console.log(data)
-            res.render("savedListing", {listing: data});
-            })
-            .catch(err => {
-                console.log(err)
-                res.redirect("/")
+            res.render("savedListing", {
+                listing: data,
+                username: req.params.userName
             });
+            })
 
         })
 
