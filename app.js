@@ -126,7 +126,6 @@ app.get("/employer/:employerName", (req, res) => {
 
 
 /** **************** Configure Router *********************** */
-
 app.use("/api", new AppRouter(JobService, express, knex).router());
 app.use("/", authRouter.router());
 app.use("/", viewRouter.router());
@@ -147,4 +146,18 @@ app.get("/usererror", (req, res) => {
 //setup port
 app.listen(config, () => {
   console.log(`Listening to ${config.port}`);
+});
+
+// ----------------- route for Search Jobs Page (temporarily) -----------------
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const jobListingData = require('./joblisting');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static('public'));
+
+app.get('/api/joblisting', (req, res) => {
+  res.send(jobListingData);
 });

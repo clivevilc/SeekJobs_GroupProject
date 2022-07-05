@@ -17,9 +17,12 @@ class AuthRouter {
     router.post(
       "/login",
       passportFunctions.authenticate("local-login", {
-        successRedirect: "/user",
+        //successRedirect: "/user/",
         failureRedirect: "/usererror",
-      })
+      }),
+      (req,res) => {
+        res.redirect("/user/" + req.user.username)
+      }
     );
 
     // Log Out POST route
