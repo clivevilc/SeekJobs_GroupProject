@@ -1,22 +1,19 @@
 /**********************************************
  * Username and Password (Local Strategy)
  * ==================================
- * 1. Look at documentation
- * http://www.passportjs.org/packages/passport-local/
- * 2. Implement callback (verifies username and password)
- * 3. Specify strategy in route
  ***********************************************/
 
  const development = require("../db/knexfile").development;
  const hashFunction = require("./hashFunction");
  const knex = require("knex")(development);
  const TABLE_NAME = "credentials";
- const LocalStrategy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
+ const crypto = require('crypto')
  /**********************************************
  
   ***********************************************/
  module.exports = new LocalStrategy(async (username, password, done) => {
-   console.log("logging in");
+   console.log("logging in >> Login Strategy");
    // try putting the username in
    try {
      let users = await knex(TABLE_NAME).where({
@@ -31,7 +28,7 @@
      // otherwise, get the user
      let user = users[0];
  
-     console.log("User", user);
+     console.log("User is ", user.username);
      console.log("User password", user.password);
      // check their password
      let result = await hashFunction.checkPassword(password, user.hash);
@@ -50,3 +47,5 @@
    }
  });
  
+
+ /// Sign Up Page

@@ -235,7 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
       })
     // alert(`Hello there`);
   });
-
   // ----------- 4. filter jobs -----------
   // const searchBar = $("#input-job-company");
   // searchBar.on('keyup', e => {

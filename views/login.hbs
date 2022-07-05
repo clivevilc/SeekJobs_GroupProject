@@ -1,3 +1,9 @@
+{{!-- Navbar --}}
+
+{{>navbar}}
+
+
+
 {{! ***************** Login Page ************* }}
 <section id="login" class="vh-100">
     <div class="container py-5 h-100">
@@ -10,12 +16,13 @@
                     />
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form>
+                <form action="/login" method="post">
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         <h1>Log In</h1>
                         <label class="form-label">Email</label>
-                        <input type="username" name="username" class="form-control
+                        <input type="username" name="username"
+                            class="form-control
                             form-control-lg"
                             />
                     </div>
@@ -51,7 +58,9 @@
                         type="submit"
                         class="btn btn-primary btn-lg btn-block signin-btn">Sign
                         in</button>
-
+                    <hr>
+                    <p class="help">Don't have an account? <a href="/register">Sign
+                            up</a></p>
                 </form>
             </div>
         </div>

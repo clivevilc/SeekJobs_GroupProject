@@ -1,13 +1,30 @@
-{{! ***************** Navbar ************* }}
-{{>loggedinNavbar}}
+/* //const { default: axios } = require("axios")
 
-{{! ***************** User Profile Page ************* }}
+const getProfile = () => {
+    axios
+        .get(`/api/user/clive`)
+        .then((res) => {
+            console.log(res.data)
+            //reloadListing(res.data)
+            loadProfile(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
 
-<div id="userProfile"></div>
-{{!-- <button class="btn btn-primary my-3" id="getProf">GET</button> --}}
+// AXIOS INSTANCES
+//Render to browser
+const loadProfile = (profile) => {
+    // code here
+    console.log("Loading user profile");
+    $("#userProfile").html(profileTemplate({ profile: profile }));
+  };
 
-
-{{#each profile}}   
+//Tempalate for user profile
+let profileTemplate = Handlebars.compile(
+    `
+    {{#each profile}}   
     <section id="userprofile">
     <div class="container py-5">
         <div class="row">
@@ -33,8 +50,7 @@
                             class="rounded-circle img-fluid" style="width:
                             110px;">
                         <br>
-                        {{!-- <h5 class="my-3"> {{first_name}} {{last_name}}</h5> --}}
-                        <h5 class="my-3"> {{username}} </h5>
+                        <h5 class="my-3"> {{first_name}} {{last_name}}</h5>
                         <p class="text-muted mb-1">Full Stack Developer</p>
                         <p class="text-muted mb-4">Hong Kong SAR</p>
                         <div class="d-flex justify-content-center mb-2">
@@ -54,7 +70,7 @@
                                 <p class="mb-0">First Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{username}}</p>
+                                <p class="text-muted mb-0">{{first_name}}</p>
                             </div>
                         </div>
                         <hr>
@@ -148,4 +164,9 @@
     </div>
 </section>
 {{/each}}
+    `
+)
 
+  // Event listeners
+  document.getElementById('getProf').addEventListener('click', getProfile);
+ */

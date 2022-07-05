@@ -6,8 +6,10 @@
     return knex.schema.createTable("credentials", (table) =>{
         table.increments().primary();
         table.string("username").unique().notNullable();
+        table.string("hash");
         table.string("password").notNullable();
         table.string("user_type").notNullable();
+
         table.timestamps(false, true);
         })
   

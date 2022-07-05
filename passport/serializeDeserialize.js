@@ -1,7 +1,7 @@
 // Encrypt and decrypt the user data and verify that the information
 
 
-const userQueries = require("../db/userAuthQueries");
+const userAuthQueries = require("../db/userAuthQueries");
 // passport generates token and puts it in a cookie, then sends it to user browser
 function serializeUser(user, done) {
   console.log(
@@ -9,7 +9,7 @@ function serializeUser(user, done) {
     user
   );
 
-  return done(null, user);
+  return done(null, user.id);
 }
 
 // with every request, cookie will be sent back to server. server will take the token, pass it into this function, and turn it into a user
@@ -18,8 +18,9 @@ function deserializeUser(id, done) {
   console.log(
     "Deserialize: server will take token from your browser, and run this function to check if user exists"
   );
-  userQueries
-    .getById(id.id)
+  console.log("userAuthQueries", userAuthQueries);
+  userAuthQueries
+    .getByID(id) // user id is unique
     .then((users) => {
       if (users.length === 0) {
         return done(null, false);
