@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  /* --------------------- # Search Bars X3 --------------------- */
+  /* --------------------- 1. Search Bars --------------------- */
   // 1st & 2nd: Job title or company, All locations
   // Toggle between hiding and showing the dropdown when the btn is clicked
   $(".dropbtn").click(function() {
@@ -26,20 +26,20 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   // Filter keywords and return matching results
-  function filterFunction() {
-    var input, filter, a, i;
-    input = document.getElementById("input-job-company");
-    filter = input.value.toUpperCase();
-    a = document.getElementById("search-bar-dropdown").getElementsByTagName("a");
-    for (i = 0; i < a.length; i++) {
-      txtValue = a[i].textContent || a[i].innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        a[i].style.display = "";
-      } else {
-        a[i].style.display = "none";
-      }
-    }
-  }
+  // function filterFunction() {
+  //   var input, filter, a, i;
+  //   input = document.getElementById("input-job-company");
+  //   filter = input.value.toLowerCase();
+  //   a = document.getElementById("search-bar-dropdown").getElementsByTagName("a");
+  //   for (i = 0; i < a.length; i++) {
+  //     txtValue = a[i].textContent || a[i].innerText;
+  //     if (txtValue.toLowerCase().indexOf(filter) > -1) {
+  //       a[i].style.display = "";
+  //     } else {
+  //       a[i].style.display = "none";
+  //     }
+  //   }
+  // }
 
   // Should be replaced with database or seperate .json file
   var jobsAndCompany = ["Full-Stack Web Developer", "Frontend Web Developer", "Backend Web Developer", "Meta", "Apple", "Xccelerate"];
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         a.setAttribute("class", "autocomplete-items");
         this.parentNode.appendChild(a);
         for (i = 0; i < arr.length; i++) {
-          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          if (arr[i].substr(0, val.length).toLowerCase() == val.toLowerCase()) {
             b = document.createElement("DIV");
             b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
@@ -189,117 +189,98 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   document.addEventListener("click", closeAllSelect);
-
-  // --------------------- TESTING ---------------------
-  const searchJobsData = async () => {
-    const response = await fetch('/api/joblisting');
-    if(response.status !== 200) {
-      throw new Error(`fail to fetch the data`);
-    } else {
-      const data = await response.json();
-      return data;
-    }
-  };
-
-  searchJobsData()
-    .then(data => console.log('resolved', jobListing(data)))
-    .catch(err =>  console.log('rejected', err.message));
-  // --------------------- manipulate DOM elements ---------------------
-  // function jobListing(data) {
-  //   data.forEach(e => {
-  //     const jobCardTemplate = $('.card');
-
-  //     // let companyName = jobCardTemplate.find('h3');
-  //     // let jobTitle = jobCardTemplate.find('h4');
-  //     // let location = jobCardTemplate.find('h5');
-  //     // let jobDescription = jobCardTemplate.find('p');
-
-  //     // companyName.text(e.company_name);
-  //     // jobTitle.text(e.title);
-  //     // location.text(e.location);
-  //     // jobDescription.text(e.description);
-
-  //     $(".card h3").text(e.company_name);
-  //     $(".card h4").text(e.title);
-  //     $(".card h5").text(e.location);
-  //     $(".card p").text(e.description);
-
-  //     jobCardTemplate.clone().insertAfter('div #newCard');
-  //   });
+  // ------------- 2. Dynamic Job Cards (left column) -------------
+  function jobListing() {
+    fetch("/api/jobListing")
+      .then(response => response.json())
+      .then(data => data.forEach(e => $("#newCard")
+        .append(`
+          <div class="card" id=${e.id}>
+            <div>
+              <h3>${e.company_name}</h3>
+              <img src="/assets/img/companyLogo-placeholder.png" alt="company logo placeholder" class="company-logo">
+            </div>
+            <h4>${e.title}</h4>
+            <h5>${e.location}</h5>
+            <p>${e.job_type}</p>
+            <p>Salary: $${e.salary} per month</p>
+          </div>
+        `)))
+      .catch(err => console.log(err));
+  }
+  jobListing();
+  // ---------------- DON'T DELETE IT ! ----------------
+  // const searchJobsData = async () => {
+  //   const response = await fetch('/api/joblisting');
+  //   if(response.status !== 200) {
+  //     throw new Error(`fail to fetch the data`);
+  //   } else {
+  //     const data = await response.json();
+  //     return data;
+  //   }
   // };
+  // ----------- 3. Dynamic Job Detail (right column) -----------
+  // error: only the upper part of card is responsive 
+  // possible solution: add a btn tp prompt job detail
+  $('#left-column-jobs').click('.card', e => {
+    console.log(e.target.getAttribute('id'));
+    fetch("/api/jobListing")
+      .then(response => response.json())
+      .then(data => {
+        console.log(e.currentTarget);
 
-  // function jobListing(data) {
-  //   data.forEach(e => {
-  //     const jobCardTemplate = $('.card').clone();
+        var result = data.filter(object => 
+          object.id == e.currentTarget.id);
+          $('.job-detail').html(result[0].description);
+      })
+    // alert(`Hello there`);
+  });
 
-  //     let companyName = jobCardTemplate.contents().find('h3');
-  //     let jobTitle = jobCardTemplate.find('h4');
-  //     let location = jobCardTemplate.find('h5');
-  //     let jobDescription = jobCardTemplate.find('p');
+  // ----------- 4. filter jobs -----------
+  // const searchBar = $("#input-job-company");
+  // searchBar.on('keyup', e => {
+  //   const term = e.target.value.toLowerCase();
+  //   const jobs = $("#left-column-jobs .card");
 
-  //     companyName.eq(0).html(e.company_name);
-  //     jobTitle.eq(0).html(e.title);
-  //     location.eq(0).html(e.location);
-  //     jobDescription.eq(0).html(e.description);
+  //   Array.from(jobs).forEach(job => {
+  //     const title = job.firstElementChild.textContent;
+  //     console.log(job);
 
-  //     // $(".card h3").text(e.company_name);
-  //     // $(".card h4").text(e.title);
-  //     // $(".card h5").text(e.location);
-  //     // $(".card p").text(e.description);
-
-  //     let container = $('div #newCard');
-
-  //     container.append(jobCardTemplate.html());
+  //     if (title.toLowerCase().indexOf(e.target.value) != -1) {
+  //       job.style.display = 'block';
+  //     } else {
+  //       job.style.display = 'none';
+  //     }
   //   });
-  // };
+  // });
 
-  //  function jobListing(data) {
-  //   data.forEach(e => {
-  //     const jobCardTemplate = $('.card').clone();
-
-  //     jobCardTemplate.find('h3').text(e.company_name);
-  //     jobCardTemplate.find('h4').text(e.title);
-  //     jobCardTemplate.find('h5').text(e.location);
-  //     jobCardTemplate.find('p').text(e.description);
-
-  //     // let companyName = jobCardTemplate.find('h3');
-  //     // let jobTitle = jobCardTemplate.find('h4');
-  //     // let location = jobCardTemplate.find('h5');
-  //     // let jobDescription = jobCardTemplate.find('p');
-
-  //     // companyName.text(e.company_name);
-  //     // jobTitle.text(e.title);
-  //     // location.text(e.location);
-  //     // jobDescription.text(e.description);
-
-  //     // $(".card h3").text(e.company_name);
-  //     // $(".card h4").text(e.title);
-  //     // $(".card h5").text(e.location);
-  //     // $(".card p").text(e.description);
-
-  //     let container = $('div #newCard');
-
-  //     container.append(jobCardTemplate.html());
-  //   });
-  // };
-
-  function jobListing(data) {
-    data.forEach(e => {
-      // const jobCardTemplate = $('.card').clone();
-
-      $(".card h3").eq(0).html(e.company_name);
-      $(".card h4").eq(0).html(e.title);
-      $(".card h5").eq(0).html(e.location);
-      $(".card p").eq(0).html(e.description);
-
-      // const jobCardTemplate = $('.card').clone();
-
-      // insert jobCardTemplate.html() after div #newCard
-      // jobCardTemplate.insertAfter('div #newCard');
-      $('.card').clone().insertAfter('div #newCard');
-
-      // append jobCardTemplate.html() after div #newCard
-      // $('div #newCard').append(jobCardTemplate.html());
+  const searchCompany = $("#input-job-company");
+  searchCompany.on('keyup', e => {
+    let term = e.target.value.toLowerCase();
+    let jobs = $("#left-column-jobs .card");
+    Array.from(jobs).forEach(job => {
+      const title = job.firstElementChild.textContent;
+      if (title.toLowerCase().indexOf(e.target.value) != -1) {
+        job.style.display = 'block';
+      } else {
+        job.style.display = 'none';
+      }
     });
-  };
+  });
+
+  const searchLocation = $("#input-location");
+  searchLocation.on('keyup', e => {
+    let term = e.target.value.toLowerCase();
+    let jobs = $("#left-column-jobs .card");
+    Array.from(jobs).forEach(job => {
+      // this line has some problems
+      const title = job.document.querySelector('div h5:nth-child(1)').textContent;
+      // console.log(title);
+      if (title.toLowerCase().indexOf(e.target.value) != -1) {
+        job.style.display = 'block';
+      } else {
+        job.style.display = 'none';
+      }
+    });
+  });
 })
