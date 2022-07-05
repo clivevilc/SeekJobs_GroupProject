@@ -109,6 +109,10 @@ class ViewRouter {
             .then((data) => {
             //console.log(data)
             res.render("savedListing", {listing: data});
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect("/")
             });
 
         })
