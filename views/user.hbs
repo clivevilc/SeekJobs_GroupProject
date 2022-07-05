@@ -4,9 +4,10 @@
 {{! ***************** User Profile Page ************* }}
 
 <div id="userProfile"></div>
-<button class="btn btn-primary my-3" id="getProf">GET</button>
+{{!-- <button class="btn btn-primary my-3" id="getProf">GET</button> --}}
 
-{{!-- <section id="userprofile">
+{{#each profile}}   
+    <section id="userprofile">
     <div class="container py-5">
         <div class="row">
             <div class="col">
@@ -37,8 +38,8 @@
                         <div class="d-flex justify-content-center mb-2">
                             <a href="/"><button type="button" class="btn
                                     btn-primary">Applied Jobs</button></a>
-                            <button type="button" class="btn btn-outline-primary
-                                ms-1">Saved Jobs</button>
+                                    <a href="/user/clive/saved"><button type="button" class="btn btn-outline-primary
+                                ms-1">Saved Jobs</button></a>
                         </div>
                     </div>
                 </div>
@@ -79,15 +80,6 @@
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">{{phone}}</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Mobile</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{mobile}}</p>
                             </div>
                         </div>
                         <hr>
@@ -152,4 +144,5 @@
             </div>
         </div>
     </div>
-</section> --}}
+</section>
+{{/each}}
