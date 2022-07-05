@@ -1,4 +1,4 @@
-//const { default: axios } = require("axios")
+/* //const { default: axios } = require("axios")
 
 const getProfile = () => {
     axios
@@ -169,3 +169,4 @@ let profileTemplate = Handlebars.compile(
 
   // Event listeners
   document.getElementById('getProf').addEventListener('click', getProfile);
+ */

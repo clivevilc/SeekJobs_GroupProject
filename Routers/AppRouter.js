@@ -73,7 +73,7 @@ class AppRouter {
                 credentials_id: data.id
             })
             .then((data) => {
-                console.log(data)
+                //console.log(data)
                 res.send(data);
             })
         })

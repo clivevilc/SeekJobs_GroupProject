@@ -28,7 +28,7 @@ const credService = require("./Services/CredService");
 const AuthRouter = require("./Routers/authRouter");
 const authRouter = new AuthRouter();
 const ViewRouter = require("./Routers/viewRouter");
-const viewRouter = new ViewRouter();
+const viewRouter = new ViewRouter(knex, express);
 
 /** **************** Configure Express *********************** */
 //Setup Handlebars
@@ -95,37 +95,6 @@ app.get("/register", (req, res) => {
   res.render("register")
 })
 
-//Render user profile page (***** To Be Done *******)
-
-app.get("user/:userName", (req, res) => {
-  const requestedUser = _.lowerCase(req.params.userName);
-  console.log(requestedUser);
-  
-  res.render("user", {
-      first_name:"first_name",
-      last_name:"last_name",
-      email:"email",
-      phone:"phone",
-      address:"address"
-
-  });
-});
-// Below is duplicated ?? ()
-app.get("/user/:userName", (req, res) => {
-
-  res.render("user", {
-    username: req.isAuthenticated() && req.user.username,
-    //
-    first_name: req.isAuthenticated() && req.user.first_name,
-  });
-});
-
-app.get("/user/:userName/saved", (req, res) => {
-  res.render("savedListing", {
-    username: req.params.userName
-  });
-});
-
 
 app.get("/user", (req, res) => {
   res.render("user", {
@@ -160,7 +129,7 @@ app.get("/employer/:employerName", (req, res) => {
 
 app.use("/api", new AppRouter(JobService, express, knex).router());
 app.use("/", authRouter.router());
-// app.use("/", viewRouter.router());
+app.use("/", viewRouter.router());
 
 //Render Error Page
 app.get("/usererror", (req, res) => {
