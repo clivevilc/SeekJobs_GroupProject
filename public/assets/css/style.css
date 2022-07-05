@@ -1,6 +1,6 @@
-/*--------------------------------------------------------------
+/*-----------------------------------------
 # General
---------------------------------------------------------------*/
+-----------------------------------------*/
 * {
   box-sizing: border-box;
 }
@@ -8,6 +8,10 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 a {
@@ -51,7 +55,7 @@ div {
 
 /*--------------------------------------------------------------
 # Top Bar
---------------------------------------------------------------*/
+-----------------------------------------*/
 #topbar {
   background: #065671;
   height: 40px;
@@ -93,9 +97,9 @@ div {
 #topbar .social-links a:hover {
   color: white;
 }
-/*--------------------------------------------------------------
+/*-----------------------------------------
 # Header
---------------------------------------------------------------*/
+-----------------------------------------*/
 #header {
   background: #fff;
   transition: all 0.5s;
@@ -133,9 +137,9 @@ div {
 .scrolled-offset {
   margin-top: 70px;
 }
-/*--------------------------------------------------------------
+/*-----------------------------------------
 # Navigation Menu
---------------------------------------------------------------*/
+-----------------------------------------*/
 /**
 * Desktop Navigation 
 */
@@ -211,7 +215,7 @@ div {
 
 /*--------------------------------------------------------------
 # Hero Section
---------------------------------------------------------------*/
+-----------------------------------------*/
 #hero {
   width: 100%;
   height: 75vh;
@@ -304,9 +308,9 @@ div {
     height: 120vh;
   }
 }
-/*--------------------------------------------------------------
+/*-----------------------------------------
 # Seek Jobs - 3 search bars + search btn
---------------------------------------------------------------*/
+-----------------------------------------*/
 .search-bar {
   font-size: 1.3vw;
   padding: 1vh 9vw 1vh 1vw;
@@ -511,24 +515,12 @@ background: #eee;
 
 /*--------------------------------------------------------------
 # Search Jobs Page
---------------------------------------------------------------*/
-#search-jobs-div {
-  /* margin-left: 10vw; */
-  /* margin-top: 3vh; */
+-----------------------------------------*/
+#search-jobs-div { /* search bars X3 */
   margin: 2.5vh 0 0 11vw;
-  /* position: center; */
 }
 
-
-
-
-
-
-
-
-/* --------------------TESTING----------------------- */
 #content {
-  /* width: 45%; */
   padding-bottom: 2vh;
 }
 
@@ -564,7 +556,7 @@ background: #eee;
   padding: 2vh 3vw;
   box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
   overflow: scroll;
-  height: 40vh;
+  height: 25vh;
   margin: 2vh 1vw 0 2vw;
   background-color: rgb(248,248,248);
 }
@@ -582,6 +574,11 @@ background: #eee;
   font-weight: 100;
 }
 
+.card p {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .company-logo {
   float: left;
   max-width:  12vw;
@@ -589,9 +586,44 @@ background: #eee;
   object-fit: cover;
   margin: 0.3vh 0.2vw 1vh;
 }
-/*--------------------------------------------------------------
+
+a {
+  color: inherit;
+}
+/*-----------------------------------------
+# Login Page
+-----------------------------------------*/
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+#login h1 {
+  color: #065671
+}
+
+#login .signin-btn:hover {
+  background-color: #05739b;
+}
+
+#login .signin-btn {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: #fff;
+  background: #065671;
+}
+/*-----------------------------------------
 # Bottom Section: copyright etc.
---------------------------------------------------------------*/
+-----------------------------------------*/
 .contact {
   margin: 0.5vh 0 2vh 2vw;
 }
