@@ -26,20 +26,20 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   // Filter keywords and return matching results
-  // function filterFunction() {
-  //   var input, filter, a, i;
-  //   input = document.getElementById("input-job-company");
-  //   filter = input.value.toLowerCase();
-  //   a = document.getElementById("search-bar-dropdown").getElementsByTagName("a");
-  //   for (i = 0; i < a.length; i++) {
-  //     txtValue = a[i].textContent || a[i].innerText;
-  //     if (txtValue.toLowerCase().indexOf(filter) > -1) {
-  //       a[i].style.display = "";
-  //     } else {
-  //       a[i].style.display = "none";
-  //     }
-  //   }
-  // }
+  function filterFunction() {
+    var input, filter, a, i;
+    input = document.getElementById("input-job-company");
+    filter = input.value.toLowerCase();
+    a = document.getElementById("search-bar-dropdown").getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+      txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toLowerCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
+  }
 
   // Should be replaced with database or seperate .json file
   var jobsAndCompany = ["Full-Stack Web Developer", "Frontend Web Developer", "Backend Web Developer", "Meta", "Apple", "Xccelerate"];
@@ -236,23 +236,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // alert(`Hello there`);
   });
   // ----------- 4. filter jobs -----------
-  // const searchBar = $("#input-job-company");
-  // searchBar.on('keyup', e => {
-  //   const term = e.target.value.toLowerCase();
-  //   const jobs = $("#left-column-jobs .card");
-
-  //   Array.from(jobs).forEach(job => {
-  //     const title = job.firstElementChild.textContent;
-  //     console.log(job);
-
-  //     if (title.toLowerCase().indexOf(e.target.value) != -1) {
-  //       job.style.display = 'block';
-  //     } else {
-  //       job.style.display = 'none';
-  //     }
-  //   });
-  // });
-
   const searchCompany = $("#input-job-company");
   searchCompany.on('keyup', e => {
     let term = e.target.value.toLowerCase();
