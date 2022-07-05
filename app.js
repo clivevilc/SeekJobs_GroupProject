@@ -149,15 +149,15 @@ app.listen(config, () => {
 });
 
 // ----------------- route for Search Jobs Page (temporarily) -----------------
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const jobListingData = require('./joblisting');
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
+// const jobListingData = require('./joblisting');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(cors());
-app.use(express.static('public'));
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(cors());
+// app.use(express.static('public'));
 
-app.get('/api/joblisting', (req, res) => {
-  res.send(jobListingData);
-});
+// app.get('/api/joblisting', (req, res) => {
+//   res.send(jobListingData);
+// });

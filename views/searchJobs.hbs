@@ -1,3 +1,10 @@
+{{! *****************  Navbar / loggedinNavbar ************* }}
+{{#if authenticated}}
+{{>loggedinNavbar}}
+{{else}}
+{{>navbar}} {{!-- // unlogged in navbar --}}
+{{/if}}
+
 {{>searchBars-searchJobs}}
 
 <!-- Main Contents -->
@@ -13,7 +20,7 @@
         </div>
         <h4>Job Title</h4>
         <h5>Location</h5>
-        <p>Job Description</p>
+          <p>Job Description</p>
         <p>Salary</p>
         <p>Salary</p>
       </div> --}}

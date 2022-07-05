@@ -191,9 +191,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener("click", closeAllSelect);
   // ------------- 2. Dynamic Job Cards (left column) -------------
   function jobListing() {
-    fetch("/api/jobListing")
+    fetch("/api/listings")
       .then(response => response.json())
-      .then(data => data.forEach(e => $("#newCard")
+      .then(data => {data.forEach(e => $("#newCard")
         .append(`
           <div class="card" id=${e.id}>
             <div>
@@ -201,11 +201,14 @@ document.addEventListener('DOMContentLoaded', function() {
               <img src="/assets/img/companyLogo-placeholder.png" alt="company logo placeholder" class="company-logo">
             </div>
             <h4>${e.title}</h4>
-            <h5>${e.location}</h5>
+            <h5 class="location">${e.location}</h5>
             <p>${e.job_type}</p>
             <p>Salary: $${e.salary} per month</p>
           </div>
-        `)))
+        `))
+        console.log(data)
+        $('.job-detail').html(data[0].description)
+      })
       .catch(err => console.log(err));
   }
   jobListing();
@@ -224,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // possible solution: add a btn tp prompt job detail
   $('#left-column-jobs').click('.card', e => {
     console.log(e.target.getAttribute('id'));
-    fetch("/api/jobListing")
+    fetch("/api/listings")
       .then(response => response.json())
       .then(data => {
         console.log(e.currentTarget);
@@ -256,7 +259,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let jobs = $("#left-column-jobs .card");
     Array.from(jobs).forEach(job => {
       // this line has some problems
-      const title = job.document.querySelector('div h5:nth-child(1)').textContent;
+      // const title = job.document.querySelector('.location').textContent;
+      const title = job.querySelector('.location').textContent;
       // console.log(title);
       if (title.toLowerCase().indexOf(e.target.value) != -1) {
         job.style.display = 'block';
