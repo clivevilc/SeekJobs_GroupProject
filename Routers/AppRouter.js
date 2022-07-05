@@ -17,7 +17,7 @@ class AppRouter {
         router.get("/listing/:userName", this.getListing.bind(this));
         router.post("/listing/:userName", this.postListing.bind(this));
         //router.put
-        //router.delete
+        router.delete("/listings", this.deleteListing.bind(this))
 
         //User Applicant API
         router.get("/users", this.getAllApplicants.bind(this));
@@ -92,6 +92,14 @@ class AppRouter {
                 user_type:"employer"
             })
             .first()
+            .then((data) => {
+                this.knex("user_employer")
+                .join('credentials', 'user_employer.credentials_id', '=', 'credentials.id')
+                .select("*")
+                .where({
+                    credentials_id: data.id
+                })
+            })
             .then((data) =>{
                 this.knex("job_listing")
                 .insert({
@@ -99,16 +107,28 @@ class AppRouter {
                     salary: req.body.salary,
                     job_type: req.body.job_type,
                     description: req.body.description,
-                    user_employer_id: data.id
+                    user_employer_id: data.id //this one is wrong
                 })
                 .where({
-                    credentials_id: data.id
+                    credentials_id: credentials_id.id
                 })
                 .then((data) =>{
                     console.log("New job listing successfully added")
                     res.send(data)
                 })
             })
+    }
+
+    deleteListing(req, res) {
+        console.log("Delete listing");
+        this.knex("job_listing")
+        .where({
+            id: req.body.id
+        })
+        .del()
+        .then((data) => {
+            res.send("Listing deleted")
+        })
     }
 
 
