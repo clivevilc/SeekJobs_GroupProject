@@ -148,9 +148,7 @@ app.listen(config, () => {
   console.log(`Listening to ${config.port}`);
 });
 
-
-
-// ----------------- TESTING -----------------
+// ----------------- route for Search Jobs Page (temporarily) -----------------
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jobListingData = require('./joblisting');
