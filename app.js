@@ -87,7 +87,7 @@ app.get("/searchJobs", (req, res) => {
 // //Render user login page
 app.get("/login", (req, res) => {
   res.render("login");
-  // console.log()
+
 });
 
 //Render Register page
@@ -98,25 +98,45 @@ app.get("/register", (req, res) => {
 //Render user profile page (***** To Be Done *******)
 
 app.get("user/:userName", (req, res) => {
-  res.render("user");
+  const requestedUser = _.lowerCase(req.params.userName);
+  console.log(requestedUser);
+  
+  res.render("user", {
+      first_name:"first_name",
+      last_name:"last_name",
+      email:"email",
+      phone:"phone",
+      address:"address"
+
+  });
+});
+// Below is duplicated ?? ()
+app.get("/user/:userName", (req, res) => {
+
+  res.render("user", {
+    username: req.isAuthenticated() && req.user.username,
+    //
+    first_name: req.isAuthenticated() && req.user.first_name,
+  });
 });
 
-app.get("/saved", (req, res) => {
-  res.render("savedListing");
+app.get("/user/:userName/saved", (req, res) => {
+  res.render("savedListing", {
+    username: req.params.userName
+  });
 });
+
 
 app.get("/user", (req, res) => {
-  res.render(
-    "user",
-    isLoggedIn
-    // {
-    // authenticated: req.isAuthenticated(),
-    // username: req.isAuthenticated() && req.user.username,
-    // // username: "Clive",
-    // first_name: req.isAuthenticated() && req.user.first_name,
-    // }
-  );
-});
+  res.render("user", {
+    authenticated: req.isAuthenticated(),
+    username: req.isAuthenticated() && req.user.username,
+    // username: "Clive",
+    first_name: req.isAuthenticated() && req.user.first_name,
+    
+  });
+  });
+
 
 //Render user application status page
 
@@ -143,11 +163,11 @@ app.use("/", authRouter.router());
 
 //Render Error Page
 
-app.get("*", (req, res) => {
+ app.get("*", (req, res) => {
   res.status(404);
   //console.log(`Error 404`);
   res.render("error");
-});
+}); 
 
 //setup port
 app.listen(config, () => {

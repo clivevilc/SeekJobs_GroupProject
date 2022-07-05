@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+//hashing the password
 function hashPassword(plainTextPassword) {
   return new Promise((resolve, reject) => {
     bcrypt.genSalt(saltRounds, (err, salt) => {
@@ -20,6 +21,7 @@ function hashPassword(plainTextPassword) {
   });
 }
 
+//Compare and check the password input and hash stored in the database
 function checkPassword(plainTextPassword, hashedPassword) {
   return new Promise((resolve, reject) => {
     console.log("Check password function");

@@ -13,7 +13,7 @@ class AppRouter {
         let router = this.express.Router();
 
         //Jobs API
-        router.get("/listing", this.getAllListing.bind(this));
+        router.get("/listings", this.getAllListing.bind(this));
         router.get("/listing/:userName", this.getListing.bind(this));
         router.post("/listing/:userName", this.postListing.bind(this));
         //router.put
@@ -129,9 +129,9 @@ class AppRouter {
         console.log("Create new login credential");
         this.knex("credentials")
             .insert({
-                username: req.body.username,
-                password: req.body.password,
-                user_type: req.body.user_type
+                username: req.body.username, //link to register page form
+                password: req.body.password, //link to register page form
+                user_type: req.body.user_type //link to register page form
             })
             .then((data) =>{
                 console.log(data);
@@ -232,7 +232,10 @@ class AppRouter {
             this.knex("user_applicant")
             .update({
                 first_name: req.body.first_name,
-                last_name: req.body.last_name
+                last_name: req.body.last_name,
+                email:req.body.email,
+                phone:req.body.phone,
+                address:req.body.address
             })
             .where({
                 credentials_id: data.id
@@ -271,29 +274,33 @@ class AppRouter {
                 .where({
                     applicant_id:data.id
                 })
-                .then((data) => {
-                    res.send(data)
-                })
-/*                 .then((data) =>{
-                    //res.send(data)
-                    for(let i=0; i <= data.length; i++){
-                        return this.knex("job_listing")
-                        .select(
-                            "id", 
+            })
+            .then(async(data) => {
+                 //console.log("string", data);
+                let array = []
+                for(let i = 0; i < data.length; i++){
+                    let newData = await this.knex("job_listing")
+                    .select("id", 
                             "title", 
                             "salary", 
                             "job_type", 
                             "description")
-                        .where({
-                            id:data[i].listing_id
-                        })
-                        .then((data) =>{
-                            console.log(data)
-                            res.send(data)
-                        })
-                    }
-                }) */
+                    .where({
+                        id: data[i].listing_id,
+                    })
+                    .first()
+                    array.push(newData);
+                } 
+                return array
+
+
+            /*     console.log("string", await this.knex("job_listing")); */
             })
+            .then((data) => {
+            console.log(data)
+            res.send(data);
+            });
+
         })
     }
 
@@ -354,6 +361,7 @@ class AppRouter {
                 .del()
                 .where({
                     id:req.body.id
+                    //id:req
                 })
                 .then((data) =>{
                     console.log("job listing is successfully added to the saved list")
